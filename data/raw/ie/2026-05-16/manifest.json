@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "37ae91a2-7f4a-4309-b7e3-91c83015874e",
+  "source_id": "src-ie-pcrs",
+  "country_code": "IE",
+  "snapshot_date": "2026-05-16",
+  "fetched_at": "2026-05-16T11:00:15+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "pcrs-druglist.csv",
+      "file_hash": "sha256:59d952e8dce7a0f33c5c2c1520fe0ae90fba88285c8930a63bf42949e39f89c1",
+      "file_size_bytes": 1106263,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.sspcrs.ie/druglist/pub",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "PCRS druglist CSV downloaded manually 2026-05-16. SPA-protected — fetch_method=manual per docs/specs/source-register.md."
+}

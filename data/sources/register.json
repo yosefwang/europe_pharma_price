@@ -2,19 +2,19 @@
   {
     "source_id": "src-ie-pcrs",
     "country_code": "IE",
-    "source_name": "PCRS Reimbursement List",
-    "source_url": "https://www.example.ie/reimbursement-list",
-    "source_type": "excel",
+    "source_name": "PCRS Druglist (HSE Primary Care Reimbursement Service)",
+    "source_url": "https://www.sspcrs.ie/druglist/pub",
+    "source_type": "csv",
     "update_frequency": "monthly",
     "fetch_method": "manual",
     "robots_txt_compliant": true,
     "tos_reviewed": true,
     "tos_permits_research": true,
-    "manual_refresh_reason": "Source requires login; download manually each month",
-    "registered_at": "2026-05-16T10:00:00+00:00",
-    "registered_by": "phase-2-init",
+    "manual_refresh_reason": "Spring/Netscaler-protected SPA: download requires submitting the search form (with All Items category) in a real browser, then clicking Download on the results page. Automated POSTs are returned 403 Access Denied.",
+    "registered_at": "2026-05-16T11:00:00+00:00",
+    "registered_by": "real-data-ingestion",
     "status": "captured",
-    "notes": "Test fixture only — replace with real PCRS source before production use"
+    "notes": "Published column 'Reimbursement Price' is the ingredient cost as defined in S.I. 639/2019: ex-factory price + 8% wholesale mark-up (12% for fridge items). Excludes VAT and pharmacy markup/dispensing fee. See decisions/003."
   },
   {
     "source_id": "src-pl-mz",

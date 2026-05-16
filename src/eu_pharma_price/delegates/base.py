@@ -68,6 +68,17 @@ class BaseDelegate(ABC):
             reader = csv.DictReader(f, delimiter=self.delimiter)
             return [dict(row) for row in reader]
 
+    def _derive_fields(self, raw_record: RawRecord) -> dict[str, Any]:
+        """Hook for subclasses to derive canonical fields from raw fields.
+
+        Default: no derivation. Subclasses override to extract values that
+        are encoded inside other columns (e.g., dosage form embedded in
+        a product-name string). Returns a dict keyed by canonical field
+        name; only keys with non-None values are applied (and only when
+        the canonical field is not already populated by the field_mapping).
+        """
+        return {}
+
     def _coerce_price(self, raw_value: str) -> Decimal | None:
         if raw_value is None or raw_value.strip() == "":
             return None
@@ -90,6 +101,15 @@ class BaseDelegate(ABC):
         for source_field, canonical_field in self.field_mapping.items():
             if source_field in raw_fields:
                 mapped[canonical_field] = raw_fields[source_field]
+
+        # Country-specific derivations from raw fields (e.g., extract
+        # dosage_form from a free-text product name when there is no
+        # dedicated column). Subclasses override _derive_fields to
+        # populate fields not directly mappable.
+        derived = self._derive_fields(raw_record)
+        for k, v in derived.items():
+            if v is not None and not mapped.get(k):
+                mapped[k] = v
 
         required = ["product_name", "strength", "dosage_form", "pack_size"]
         missing = [f for f in required if not mapped.get(f)]
