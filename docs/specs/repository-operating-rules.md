@@ -20,6 +20,8 @@ The charter states that "the principles in section 4 and the scope in section 2 
 - A specific raw record within that file, identified by a stable record ID assigned at parse time.
 - A fetched-at timestamp recording when the source was acquired.
 
+**Partitioning rule.** `data/raw/` holds the original source file as published — the verbatim download with its hash, URL, and fetch metadata. `data/snapshots/` holds the immutable, dated partitions that the system uses as the authoritative reference for traceability. The raw file is the evidence of what was published; the snapshot is the system's versioned, queryable copy. Every snapshot traces to a raw file; every raw file may produce one or more snapshots.
+
 **Prohibition.** Inventing, imputing, defaulting, or hard-coding a numeric value. If a source does not provide the value, the value does not exist in the substrate. A missing value is recorded as null with a reason, not filled with a proxy.
 
 **Verification.** Every numeric field in `data/canonical/`, `data/comparisons/`, and all downstream outputs must carry a `source_hash` and `raw_record_id` attribute. A validation pass that finds a numeric field without these attributes fails.
