@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "projectMap": "项目地图",
+    "schemaMap": "模式地图",
+    "sourceRegister": "来源登记",
+    "countryWorkspace": "国家工作区",
+    "policyMapping": "政策映射",
+    "dataHealth": "数据健康",
+    "comparisonCandidates": "比较候选",
+    "reviewQueue": "审阅队列",
+    "auditTrail": "审计追踪",
+    "comparisonWorkbench": "比较工作台"
+  },
+  "phase": {
+    "p0": {
+      "name": "阶段 0",
+      "description": "范围界定与章程"
+    },
+    "p1": {
+      "name": "阶段 1",
+      "description": "来源发现与登记"
+    },
+    "p2": {
+      "name": "阶段 2",
+      "description": "模式设计与规范模型"
+    },
+    "p3": {
+      "name": "阶段 3",
+      "description": "来源解析与原始记录提取"
+    },
+    "p4": {
+      "name": "阶段 4",
+      "description": "规范记录生产"
+    },
+    "p5": {
+      "name": "阶段 5",
+      "description": "政策解释"
+    },
+    "p6": {
+      "name": "阶段 6",
+      "description": "数据画像"
+    },
+    "p7": {
+      "name": "阶段 7",
+      "description": "比较候选生成"
+    },
+    "p8": {
+      "name": "阶段 8",
+      "description": "审阅与可用性评估"
+    },
+    "p9": {
+      "name": "阶段 9",
+      "description": "发布与引用"
+    }
+  },
+  "countryScope": {
+    "initiallyIncluded": "初始纳入",
+    "initiallyExcluded": "初始排除",
+    "candidatePool": "候选池",
+    "aPrioriIncluded": "先验纳入",
+    "aPrioriExcluded": "先验排除"
+  },
+  "country": {
+    "austria": "奥地利",
+    "belgium": "比利时",
+    "bulgaria": "保加利亚",
+    "croatia": "克罗地亚",
+    "cyprus": "塞浦路斯",
+    "czechRepublic": "捷克",
+    "denmark": "丹麦",
+    "estonia": "爱沙尼亚",
+    "finland": "芬兰",
+    "france": "法国",
+    "germany": "德国",
+    "greece": "希腊",
+    "hungary": "匈牙利",
+    "iceland": "冰岛",
+    "ireland": "爱尔兰",
+    "italy": "意大利",
+    "latvia": "拉脱维亚",
+    "liechtenstein": "列支敦士登",
+    "lithuania": "立陶宛",
+    "luxembourg": "卢森堡",
+    "malta": "马耳他",
+    "netherlands": "荷兰",
+    "norway": "挪威",
+    "poland": "波兰",
+    "portugal": "葡萄牙",
+    "romania": "罗马尼亚",
+    "slovakia": "斯洛伐克",
+    "slovenia": "斯洛文尼亚",
+    "spain": "西班牙",
+    "sweden": "瑞典",
+    "switzerland": "瑞士",
+    "unitedKingdom": "英国"
+  },
+  "status": {
+    "stableCommitment": "稳定承诺",
+    "workingHypothesis": "工作假设",
+    "notStarted": "未开始",
+    "inProgress": "进行中",
+    "completed": "已完成"
+  },
+  "evidence": {
+    "sourceDocument": "来源文档",
+    "rawRecord": "原始记录",
+    "canonicalPriceRecord": "规范价格记录",
+    "policyInterpretation": "政策解释",
+    "dataProfile": "数据画像",
+    "derivationRule": "派生规则",
+    "comparisonCandidate": "比较候选",
+    "reviewAssessment": "审阅评估",
+    "anomalyReport": "异常报告"
+  },
+  "comparison": {
+    "manufacturerSide": "制造商端价格",
+    "payerReimbursement": "支付方报销价格",
+    "pharmacyPurchase": "药房采购价格",
+    "publicRetail": "公共零售价格",
+    "unmappedConcept": "未映射价格概念",
+    "notComparable": "不可比较"
+  },
+  "usability": {
+    "usable": "可用",
+    "usableWithCaveat": "附注可用",
+    "exploratory": "探索性",
+    "notComparable": "不可比较",
+    "needsReview": "需审阅"
+  },
+  "ui": {
+    "search": "搜索",
+    "filter": "筛选",
+    "snapshot": "快照",
+    "date": "日期",
+    "currency": "货币",
+    "language": "语言",
+    "provenance": "来源追溯",
+    "evidenceChain": "证据链",
+    "caveats": "注意事项",
+    "status": "状态",
+    "source": "来源",
+    "hash": "哈希",
+    "fetchedAt": "获取时间"
+  }
+}

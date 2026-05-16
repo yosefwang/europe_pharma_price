@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "projectMap": "Project Map",
+    "schemaMap": "Schema Map",
+    "sourceRegister": "Source Register",
+    "countryWorkspace": "Country Workspace",
+    "policyMapping": "Policy Mapping",
+    "dataHealth": "Data Health",
+    "comparisonCandidates": "Comparison Candidates",
+    "reviewQueue": "Review Queue",
+    "auditTrail": "Audit Trail",
+    "comparisonWorkbench": "Comparison Workbench"
+  },
+  "phase": {
+    "p0": {
+      "name": "Phase 0",
+      "description": "Scoping and charter"
+    },
+    "p1": {
+      "name": "Phase 1",
+      "description": "Source discovery and registration"
+    },
+    "p2": {
+      "name": "Phase 2",
+      "description": "Schema design and canonical model"
+    },
+    "p3": {
+      "name": "Phase 3",
+      "description": "Source parsing and raw record extraction"
+    },
+    "p4": {
+      "name": "Phase 4",
+      "description": "Canonical record production"
+    },
+    "p5": {
+      "name": "Phase 5",
+      "description": "Policy interpretation"
+    },
+    "p6": {
+      "name": "Phase 6",
+      "description": "Data profiling"
+    },
+    "p7": {
+      "name": "Phase 7",
+      "description": "Comparison candidate generation"
+    },
+    "p8": {
+      "name": "Phase 8",
+      "description": "Review and usability assessment"
+    },
+    "p9": {
+      "name": "Phase 9",
+      "description": "Publication and citation"
+    }
+  },
+  "countryScope": {
+    "initiallyIncluded": "Initially Included",
+    "initiallyExcluded": "Initially Excluded",
+    "candidatePool": "Candidate Pool",
+    "aPrioriIncluded": "A priori included",
+    "aPrioriExcluded": "A priori excluded"
+  },
+  "country": {
+    "austria": "Austria",
+    "belgium": "Belgium",
+    "bulgaria": "Bulgaria",
+    "croatia": "Croatia",
+    "cyprus": "Cyprus",
+    "czechRepublic": "Czech Republic",
+    "denmark": "Denmark",
+    "estonia": "Estonia",
+    "finland": "Finland",
+    "france": "France",
+    "germany": "Germany",
+    "greece": "Greece",
+    "hungary": "Hungary",
+    "iceland": "Iceland",
+    "ireland": "Ireland",
+    "italy": "Italy",
+    "latvia": "Latvia",
+    "liechtenstein": "Liechtenstein",
+    "lithuania": "Lithuania",
+    "luxembourg": "Luxembourg",
+    "malta": "Malta",
+    "netherlands": "Netherlands",
+    "norway": "Norway",
+    "poland": "Poland",
+    "portugal": "Portugal",
+    "romania": "Romania",
+    "slovakia": "Slovakia",
+    "slovenia": "Slovenia",
+    "spain": "Spain",
+    "sweden": "Sweden",
+    "switzerland": "Switzerland",
+    "unitedKingdom": "United Kingdom"
+  },
+  "status": {
+    "stableCommitment": "stable commitment",
+    "workingHypothesis": "working hypothesis",
+    "notStarted": "not started",
+    "inProgress": "in progress",
+    "completed": "completed"
+  },
+  "evidence": {
+    "sourceDocument": "source document",
+    "rawRecord": "raw record",
+    "canonicalPriceRecord": "canonical price record",
+    "policyInterpretation": "policy interpretation",
+    "dataProfile": "data profile",
+    "derivationRule": "derivation rule",
+    "comparisonCandidate": "comparison candidate",
+    "reviewAssessment": "review assessment",
+    "anomalyReport": "anomaly report"
+  },
+  "comparison": {
+    "manufacturerSide": "manufacturer-side price",
+    "payerReimbursement": "payer reimbursement price",
+    "pharmacyPurchase": "pharmacy purchase price",
+    "publicRetail": "public retail price",
+    "unmappedConcept": "unmapped price concept",
+    "notComparable": "not comparable"
+  },
+  "usability": {
+    "usable": "usable",
+    "usableWithCaveat": "usable with caveat",
+    "exploratory": "exploratory",
+    "notComparable": "not comparable",
+    "needsReview": "needs review"
+  },
+  "ui": {
+    "search": "Search",
+    "filter": "Filter",
+    "snapshot": "Snapshot",
+    "date": "Date",
+    "currency": "Currency",
+    "language": "Language",
+    "provenance": "Provenance",
+    "evidenceChain": "Evidence Chain",
+    "caveats": "Caveats",
+    "status": "Status",
+    "source": "Source",
+    "hash": "Hash",
+    "fetchedAt": "Fetched At"
+  }
+}

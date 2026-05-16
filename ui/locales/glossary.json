@@ -1,0 +1,176 @@
+[
+  {
+    "id": "source-document",
+    "en": "source document",
+    "zh-CN": "来源文档",
+    "note": "The original published document from a national authority"
+  },
+  {
+    "id": "raw-record",
+    "en": "raw record",
+    "zh-CN": "原始记录",
+    "note": "Unmodified record as extracted from the source document"
+  },
+  {
+    "id": "canonical-price-record",
+    "en": "canonical price record",
+    "zh-CN": "规范价格记录",
+    "note": "Normalized, typed price record produced by the Country Delegate"
+  },
+  {
+    "id": "policy-interpretation",
+    "en": "policy interpretation",
+    "zh-CN": "政策解释",
+    "note": "A reading of what a national price field means and how it relates to fields in other countries"
+  },
+  {
+    "id": "data-profile",
+    "en": "data profile",
+    "zh-CN": "数据画像",
+    "note": "Assessment of whether a policy-named field actually exists, is populated, and behaves plausibly in data"
+  },
+  {
+    "id": "derivation-rule",
+    "en": "derivation rule",
+    "zh-CN": "派生规则",
+    "note": "A deterministic rule specifying how a derived value is computed from its inputs"
+  },
+  {
+    "id": "comparison-candidate",
+    "en": "comparison candidate",
+    "zh-CN": "比较候选",
+    "note": "A paired price record across two countries, with evidence attached, pending review"
+  },
+  {
+    "id": "review-assessment",
+    "en": "review assessment",
+    "zh-CN": "审阅评估",
+    "note": "Human or agent assessment of a comparison candidate's usability"
+  },
+  {
+    "id": "anomaly-report",
+    "en": "anomaly report",
+    "zh-CN": "异常报告",
+    "note": "A finding that something does not fit the system's current assumptions"
+  },
+  {
+    "id": "manufacturer-side-price",
+    "en": "manufacturer-side price",
+    "zh-CN": "制造商端价格",
+    "note": "Price at the manufacturer exit point in the supply chain"
+  },
+  {
+    "id": "payer-reimbursement-price",
+    "en": "payer reimbursement price",
+    "zh-CN": "支付方报销价格",
+    "note": "Price the payer (national health system or insurer) reimburses"
+  },
+  {
+    "id": "pharmacy-purchase-price",
+    "en": "pharmacy purchase price",
+    "zh-CN": "药房采购价格",
+    "note": "Price at which the pharmacy acquires the product"
+  },
+  {
+    "id": "public-retail-price",
+    "en": "public retail price",
+    "zh-CN": "公共零售价格",
+    "note": "Price paid by the end consumer at the pharmacy counter"
+  },
+  {
+    "id": "unmapped-price-concept",
+    "en": "unmapped price concept",
+    "zh-CN": "未映射价格概念",
+    "note": "A national price field that does not map cleanly to any comparison vocabulary category"
+  },
+  {
+    "id": "not-comparable",
+    "en": "not comparable",
+    "zh-CN": "不可比较",
+    "note": "A usability verdict: the two prices cannot be meaningfully compared"
+  },
+  {
+    "id": "atc",
+    "en": "ATC",
+    "zh-CN": "ATC",
+    "note": "WHO Anatomical Therapeutic Chemical classification"
+  },
+  {
+    "id": "inn",
+    "en": "INN",
+    "zh-CN": "INN",
+    "note": "International Nonproprietary Name"
+  },
+  {
+    "id": "edqm",
+    "en": "EDQM",
+    "zh-CN": "EDQM",
+    "note": "European Directorate for the Quality of Medicines; publishes Standard Terms for dosage forms, routes, containers"
+  },
+  {
+    "id": "ucum",
+    "en": "UCUM",
+    "zh-CN": "UCUM",
+    "note": "Unified Code for Units of Measure"
+  },
+  {
+    "id": "eea",
+    "en": "EEA",
+    "zh-CN": "EEA",
+    "note": "European Economic Area: 27 EU member states plus Iceland, Liechtenstein, Norway"
+  },
+  {
+    "id": "faspm",
+    "en": "FASPM",
+    "zh-CN": "FASPM",
+    "note": "Framework Agreement on the Supply and Pricing of Medicines (Ireland)"
+  },
+  {
+    "id": "beneluxa",
+    "en": "BENELUXA",
+    "zh-CN": "BENELUXA",
+    "note": "Joint pharmaceutical policy initiative: Belgium, Netherlands, Luxembourg, Austria, Ireland"
+  },
+  {
+    "id": "reimbursement-price",
+    "en": "reimbursement price",
+    "zh-CN": "报销价格",
+    "note": "Generic term for a price reimbursed by a national health system"
+  },
+  {
+    "id": "wholesale-price",
+    "en": "wholesale price",
+    "zh-CN": "批发价格",
+    "note": "Price at the wholesale distribution stage"
+  },
+  {
+    "id": "retail-price",
+    "en": "retail price",
+    "zh-CN": "零售价格",
+    "note": "Price at the retail (pharmacy) point of sale"
+  },
+  {
+    "id": "reference-price",
+    "en": "reference price",
+    "zh-CN": "参考价格",
+    "note": "A price set or used by a national authority as a benchmark for reimbursement or clustering"
+  },
+  {
+    "id": "price-cap",
+    "en": "price cap",
+    "zh-CN": "价格上限",
+    "note": "A maximum permissible price set by regulation"
+  },
+  {
+    "id": "price-freeze",
+    "en": "price freeze",
+    "zh-CN": "价格冻结",
+    "note": "A regulatory measure that prevents price increases for a defined period"
+  },
+  {
+    "id": "mandatory-discount",
+    "en": "mandatory discount",
+    "zh-CN": "强制折扣",
+    "note": "A statutorily required discount or clawback applied to the list price"
+  }
+]
