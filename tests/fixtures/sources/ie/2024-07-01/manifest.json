@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "74034955-1691-4ed0-b372-f879755b298d",
+  "source_id": "src-ie-pcrs",
+  "country_code": "IE",
+  "snapshot_date": "2024-07-01",
+  "fetched_at": "2024-07-01T10:00:00+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "zero-price-fixture.csv",
+      "file_hash": "sha256:01fe2f639c58ad97028d350fd08534c90e721a8fd89574ab6833793f1f31b963",
+      "file_size_bytes": 346,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.example.ie/reimbursement-list",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Fixture for Phase 5: prices mostly zero, fails positive-rate threshold"
+}

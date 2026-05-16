@@ -1,0 +1,70 @@
+{
+  "country_code": "IE",
+  "snapshot_date": "2024-07-01",
+  "snapshot_status": "red",
+  "assessed_at": "2026-05-16T10:06:28.461706+00:00",
+  "profiles": [
+    {
+      "id": "9a1d3093-9992-4be6-8851-935b0fb9141a",
+      "country_code": "IE",
+      "snapshot_date": "2024-07-01",
+      "price_type": "price_amount",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "implausible",
+      "record_count": 5,
+      "assessed_at": "2026-05-16T10:06:28.459973Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": "0.0",
+      "max_value": "3.1",
+      "median_value": "0.0",
+      "null_count": 0,
+      "outlier_count": 3,
+      "distribution_notes": "min=0.00 median=0.00 max=3.10 n=5",
+      "comparison_to_prior": null,
+      "issues": [
+        "only 40.00% of prices are strictly positive"
+      ]
+    },
+    {
+      "id": "7aa1214b-4128-4318-bf31-c0e9dee01a66",
+      "country_code": "IE",
+      "snapshot_date": "2024-07-01",
+      "price_type": "price_currency",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 5,
+      "assessed_at": "2026-05-16T10:06:28.460306Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "distinct=['EUR']",
+      "comparison_to_prior": null,
+      "issues": []
+    },
+    {
+      "id": "03d9f63a-0815-4dd6-a4da-d924cc2970fb",
+      "country_code": "IE",
+      "snapshot_date": "2024-07-01",
+      "price_type": "snapshot_date",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 5,
+      "assessed_at": "2026-05-16T10:06:28.461631Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "all_match=True future_dated=0",
+      "comparison_to_prior": null,
+      "issues": []
+    }
+  ]
+}

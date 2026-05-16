@@ -14,6 +14,7 @@ st.set_page_config(
 
 from i18n import get_locale, set_locale, t  # noqa: E402
 from pages.country_workspace import render_country_workspace  # noqa: E402
+from pages.data_health import render_data_health  # noqa: E402
 from pages.policy_mapping import render_policy_mapping  # noqa: E402
 from pages.project_map import render_project_map  # noqa: E402
 from pages.schema_map import render_schema_map  # noqa: E402
@@ -32,7 +33,7 @@ NAV_KEYS = [
     "comparisonWorkbench",
 ]
 
-ACTIVE_VIEWS = {"projectMap", "schemaMap", "sourceRegister", "countryWorkspace", "policyMapping"}
+ACTIVE_VIEWS = {"projectMap", "schemaMap", "sourceRegister", "countryWorkspace", "policyMapping", "dataHealth"}
 
 
 def _sidebar():
@@ -82,6 +83,8 @@ def _main_content():
         render_country_workspace()
     elif view == "policyMapping":
         render_policy_mapping()
+    elif view == "dataHealth":
+        render_data_health()
     else:
         st.info(t("status.notStarted"))
 

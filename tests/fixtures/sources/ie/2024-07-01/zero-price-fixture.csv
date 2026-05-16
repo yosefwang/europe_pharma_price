@@ -1,0 +1,6 @@
+PRODUCT_CODE,PRODUCT_NAME,STRENGTH,DOSAGE_FORM,PACK_SIZE,MANUFACTURER,EX_FACTORY_PRICE_EUR
+12348,Test Product 100mg,100mg,tablet,28,Acme,0.00
+12349,Test Product 200mg,200mg,tablet,28,Acme,0.00
+12350,Test Product 300mg,300mg,tablet,28,Acme,2.50
+12351,Test Product 400mg,400mg,tablet,28,Acme,0.00
+12352,Test Product 500mg,500mg,tablet,28,Acme,3.10

@@ -281,6 +281,42 @@
     "notComparable": "不可比较 — 需要审查",
     "needsReview": "需要审查（低置信度）"
   },
+  "dataHealth": {
+    "title": "数据健康度",
+    "subtitle": "字段级数据画像：政策命名字段是否存在且行为合理？",
+    "selectSnapshot": "选择一个快照",
+    "noProfiles": "该国家暂无数据画像",
+    "noFieldProfiles": "该快照暂无字段画像",
+    "fieldProfiles": "字段画像",
+    "comparisonReadiness": "比较就绪度",
+    "policyPermits": "政策允许该字段",
+    "dataPermits": "数据允许该字段",
+    "blockedByData": "政策允许此字段，但数据画像不允许",
+    "ready": "可用于比较",
+    "needsReview": "符合条件但需要审查",
+    "policyNotPermitted": "该字段无政策解释",
+    "fields": {
+      "fieldExists": "字段存在",
+      "nonNullRate": "非空率",
+      "recordCount": "记录数",
+      "minValue": "最小值",
+      "maxValue": "最大值",
+      "medianValue": "中位数",
+      "outlierCount": "离群值",
+      "distribution": "分布",
+      "issues": "问题"
+    },
+    "plausibility": {
+      "plausible": "合理",
+      "suspect": "可疑",
+      "implausible": "不合理"
+    },
+    "snapshotStatus": {
+      "green": "所有字段合理",
+      "yellow": "至少一个字段可疑",
+      "red": "至少一个字段不合理"
+    }
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

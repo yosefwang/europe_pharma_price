@@ -281,6 +281,42 @@
     "notComparable": "Not comparable — review required",
     "needsReview": "Needs review (low confidence)"
   },
+  "dataHealth": {
+    "title": "Data Health",
+    "subtitle": "Field-level data profiling: does the policy-named field exist and behave plausibly?",
+    "selectSnapshot": "Select a snapshot",
+    "noProfiles": "No data profiles for this country",
+    "noFieldProfiles": "No field profiles for this snapshot",
+    "fieldProfiles": "Field profiles",
+    "comparisonReadiness": "Comparison readiness",
+    "policyPermits": "Policy permits this field",
+    "dataPermits": "Data permits this field",
+    "blockedByData": "Policy permits this field, but data profile does not",
+    "ready": "Ready for comparison",
+    "needsReview": "Eligible but flagged for review",
+    "policyNotPermitted": "No policy interpretation for this field",
+    "fields": {
+      "fieldExists": "Field exists",
+      "nonNullRate": "Non-null rate",
+      "recordCount": "Record count",
+      "minValue": "Min",
+      "maxValue": "Max",
+      "medianValue": "Median",
+      "outlierCount": "Outliers",
+      "distribution": "Distribution",
+      "issues": "Issues"
+    },
+    "plausibility": {
+      "plausible": "Plausible",
+      "suspect": "Suspect",
+      "implausible": "Implausible"
+    },
+    "snapshotStatus": {
+      "green": "All fields plausible",
+      "yellow": "At least one field is suspect",
+      "red": "At least one field is implausible"
+    }
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",
