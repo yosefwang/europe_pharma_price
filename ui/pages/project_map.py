@@ -10,8 +10,8 @@ import streamlit as st
 from i18n import t
 
 PHASES = [
-    ("p0", "in_progress"),
-    ("p1", "not_started"),
+    ("p0", "completed"),
+    ("p1", "completed"),
     ("p2", "not_started"),
     ("p3", "not_started"),
     ("p4", "not_started"),
