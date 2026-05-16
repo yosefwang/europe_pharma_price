@@ -127,6 +127,28 @@
     "notComparable": "不可比较",
     "needsReview": "需审阅"
   },
+  "schema": {
+    "title": "模式地图",
+    "subtitle": "证据链工件类型及其依赖关系",
+    "dependencies": "依赖",
+    "dependedOnBy": "被依赖于",
+    "noDependencies": "根工件（无依赖）",
+    "selectArtifact": "选择一个工件以查看其依赖关系",
+    "twoGearRule": "比较需要双方同时具备政策解释和数据画像",
+    "noBarePrices": "禁止裸价格：每个价格必须携带货币、日期和来源引用",
+    "noSilentTransforms": "禁止静默转换：每个派生值必须引用派生规则",
+    "desc": {
+      "sourceDocument": "从国家定价机构获取的文件的不可变记录",
+      "rawRecord": "从来源文档中逐字提取的单条结构化行",
+      "canonicalPriceRecord": "药品已发布价格的类型化结构表示",
+      "policyInterpretation": "对国家价格字段含义的有据解读",
+      "dataProfile": "评估政策命名字段是否存在且行为合理",
+      "derivationRule": "记录应用于规范值的数值转换",
+      "comparisonCandidate": "针对某分子在两国之间提出的价格比较",
+      "reviewAssessment": "评估完整证据链的最终质量关卡",
+      "anomalyReport": "不符合系统当前假设的发现"
+    }
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

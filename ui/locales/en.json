@@ -127,6 +127,28 @@
     "notComparable": "not comparable",
     "needsReview": "needs review"
   },
+  "schema": {
+    "title": "Schema Map",
+    "subtitle": "Evidence chain artifact types and their dependencies",
+    "dependencies": "Dependencies",
+    "dependedOnBy": "Depended on by",
+    "noDependencies": "Root artifact (no dependencies)",
+    "selectArtifact": "Select an artifact to view its dependencies",
+    "twoGearRule": "Comparison requires both policy interpretation AND data profile on both sides",
+    "noBarePrices": "No bare prices: every price must carry currency, date, and source reference",
+    "noSilentTransforms": "No silent transforms: every derived value must reference a derivation rule",
+    "desc": {
+      "sourceDocument": "Immutable record of a file fetched from a national pricing authority",
+      "rawRecord": "Single structured row extracted verbatim from a source document",
+      "canonicalPriceRecord": "Typed, structured representation of a medicine's published price",
+      "policyInterpretation": "Sourced reading of what a national price field means",
+      "dataProfile": "Assessment of whether a policy-named field exists and behaves plausibly",
+      "derivationRule": "Documents a numeric transformation applied to a canonical value",
+      "comparisonCandidate": "Proposed price comparison between two countries for a molecule",
+      "reviewAssessment": "Final quality gate evaluating the full evidence chain",
+      "anomalyReport": "Finding that does not fit the system's current assumptions"
+    }
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",
