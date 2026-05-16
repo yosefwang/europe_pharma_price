@@ -363,6 +363,51 @@
     "skipped": "跳过的国家对",
     "anomalies": "异常"
   },
+  "review": {
+    "title": "审查队列",
+    "subtitle": "端到端评估候选，防止弱证据成为头条结论",
+    "selectWindow": "窗口",
+    "noWindows": "暂无审查窗口",
+    "noAssessments": "该窗口暂无评估",
+    "selectAssessment": "选择一条评估",
+    "filters": "筛选",
+    "filterByCountryPair": "国家对",
+    "filterByMolecule": "分子",
+    "filterByUsability": "可用性",
+    "filterByWeakness": "存在弱维度",
+    "all": "全部",
+    "any": "任何",
+    "summary": "概要",
+    "blockingIssues": "阻断问题",
+    "caveats": "注意事项",
+    "rationale": "理由",
+    "humanOverride": "人工覆盖",
+    "supersededBy": "被取代",
+    "strengths": "证据强度",
+    "policyStrength": "政策",
+    "dataStrength": "数据",
+    "identityStrength": "身份",
+    "normalisationStrength": "归一化",
+    "usability": {
+      "usable": "可用",
+      "usable_with_caveat": "带警示可用",
+      "exploratory": "探索性",
+      "not_comparable": "不可比较"
+    },
+    "strength": {
+      "strong": "强",
+      "adequate": "充分",
+      "weak": "弱",
+      "not_applicable": "不适用"
+    },
+    "decision": {
+      "needsHumanReview": "需要人工审查",
+      "acceptedWithCaveat": "带警示接受",
+      "excluded": "排除",
+      "accommodatedByDesignChange": "通过设计变更适配",
+      "exemptedForThisInstance": "针对本实例豁免"
+    }
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

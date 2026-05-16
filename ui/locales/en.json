@@ -363,6 +363,51 @@
     "skipped": "Skipped pairs",
     "anomalies": "Anomalies"
   },
+  "review": {
+    "title": "Review Queue",
+    "subtitle": "Assess candidates end-to-end and prevent weak evidence from becoming a headline",
+    "selectWindow": "Window",
+    "noWindows": "No review windows yet",
+    "noAssessments": "No assessments in this window",
+    "selectAssessment": "Select an assessment",
+    "filters": "Filters",
+    "filterByCountryPair": "Country pair",
+    "filterByMolecule": "Molecule",
+    "filterByUsability": "Usability",
+    "filterByWeakness": "Has weak dimension",
+    "all": "All",
+    "any": "Any",
+    "summary": "Summary",
+    "blockingIssues": "Blocking issues",
+    "caveats": "Caveats",
+    "rationale": "Rationale",
+    "humanOverride": "Human override",
+    "supersededBy": "Superseded by",
+    "strengths": "Evidence strengths",
+    "policyStrength": "Policy",
+    "dataStrength": "Data",
+    "identityStrength": "Identity",
+    "normalisationStrength": "Normalisation",
+    "usability": {
+      "usable": "Usable",
+      "usable_with_caveat": "Usable with caveat",
+      "exploratory": "Exploratory",
+      "not_comparable": "Not comparable"
+    },
+    "strength": {
+      "strong": "Strong",
+      "adequate": "Adequate",
+      "weak": "Weak",
+      "not_applicable": "N/A"
+    },
+    "decision": {
+      "needsHumanReview": "Needs human review",
+      "acceptedWithCaveat": "Accepted with caveat",
+      "excluded": "Excluded",
+      "accommodatedByDesignChange": "Accommodated by design change",
+      "exemptedForThisInstance": "Exempted for this instance"
+    }
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",

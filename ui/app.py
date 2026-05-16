@@ -18,6 +18,7 @@ from pages.country_workspace import render_country_workspace  # noqa: E402
 from pages.data_health import render_data_health  # noqa: E402
 from pages.policy_mapping import render_policy_mapping  # noqa: E402
 from pages.project_map import render_project_map  # noqa: E402
+from pages.review_queue import render_review_queue  # noqa: E402
 from pages.schema_map import render_schema_map  # noqa: E402
 from pages.source_register import render_source_register  # noqa: E402
 
@@ -34,7 +35,7 @@ NAV_KEYS = [
     "comparisonWorkbench",
 ]
 
-ACTIVE_VIEWS = {"projectMap", "schemaMap", "sourceRegister", "countryWorkspace", "policyMapping", "dataHealth", "comparisonCandidates"}
+ACTIVE_VIEWS = {"projectMap", "schemaMap", "sourceRegister", "countryWorkspace", "policyMapping", "dataHealth", "comparisonCandidates", "reviewQueue"}
 
 
 def _sidebar():
@@ -88,6 +89,8 @@ def _main_content():
         render_data_health()
     elif view == "comparisonCandidates":
         render_comparison_candidates()
+    elif view == "reviewQueue":
+        render_review_queue()
     else:
         st.info(t("status.notStarted"))
 
