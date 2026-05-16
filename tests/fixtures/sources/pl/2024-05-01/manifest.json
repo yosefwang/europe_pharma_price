@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "138b7c53-d2bc-4a4a-82de-33f0a87d6b70",
+  "source_id": "src-pl-mz",
+  "country_code": "PL",
+  "snapshot_date": "2024-05-01",
+  "fetched_at": "2024-05-01T10:00:00+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "sample-cena-listy.csv",
+      "file_hash": "sha256:825c7f1941217cd3fa7aa11991812dddf906f2f25d30dc2e6e04b54a8de3f15f",
+      "file_size_bytes": 260,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.gov.pl/web/zdrowie/obwieszczenia-ministra-zdrowia-lista-lekow-refundowanych",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Test fixture for Ministerstwo Zdrowia — Lista leków refundowanych"
+}

@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "1994ee71-3359-4f71-ba71-5ba83ba65672",
+  "source_id": "src-ie-pcrs",
+  "country_code": "IE",
+  "snapshot_date": "2024-06-15",
+  "fetched_at": "2024-06-15T10:00:00+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "sample-reimbursement-list.csv",
+      "file_hash": "sha256:53839a4202ffecaae47b12f50d47db7308f1734bf21869a0ed42219dc338293e",
+      "file_size_bytes": 277,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.example.ie/reimbursement-list",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Test fixture for PCRS Reimbursement List"
+}

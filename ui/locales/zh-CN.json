@@ -149,6 +149,61 @@
       "anomalyReport": "不符合系统当前假设的发现"
     }
   },
+  "source": {
+    "title": "来源登记",
+    "subtitle": "各国价格发布端点及捕获状态",
+    "noSources": "尚未登记任何来源",
+    "selectSource": "选择一个来源以查看其快照",
+    "sources": "来源",
+    "snapshots": "快照",
+    "noSnapshots": "该来源尚无快照",
+    "fields": {
+      "sourceName": "来源名称",
+      "sourceUrl": "网址",
+      "sourceType": "格式",
+      "updateFrequency": "更新频率",
+      "fetchMethod": "获取方式",
+      "robotsTxt": "符合 robots.txt",
+      "tosReviewed": "已审核服务条款",
+      "registeredAt": "登记时间",
+      "snapshotDate": "快照日期",
+      "fetchedAt": "获取时间",
+      "fileHash": "文件哈希",
+      "fileSize": "文件大小",
+      "filename": "文件名"
+    },
+    "status": {
+      "registered": "已登记",
+      "captured": "已捕获",
+      "hashVerified": "哈希已验证",
+      "hashMismatch": "哈希不匹配",
+      "pendingManualRefresh": "等待人工刷新",
+      "blocked": "被 robots/服务条款阻止"
+    },
+    "type": {
+      "excel": "Excel",
+      "csv": "CSV",
+      "pdf": "PDF",
+      "html": "HTML",
+      "api": "API",
+      "other": "其他"
+    },
+    "frequency": {
+      "daily": "每日",
+      "weekly": "每周",
+      "monthly": "每月",
+      "quarterly": "每季度",
+      "annual": "每年",
+      "irregular": "不定期",
+      "unknown": "未知"
+    },
+    "fetchMethodLabel": {
+      "automated": "自动",
+      "manual": "人工"
+    },
+    "yes": "是",
+    "no": "否"
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

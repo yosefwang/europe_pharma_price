@@ -15,6 +15,7 @@ st.set_page_config(
 from i18n import get_locale, set_locale, t  # noqa: E402
 from pages.project_map import render_project_map  # noqa: E402
 from pages.schema_map import render_schema_map  # noqa: E402
+from pages.source_register import render_source_register  # noqa: E402
 
 NAV_KEYS = [
     "projectMap",
@@ -29,7 +30,7 @@ NAV_KEYS = [
     "comparisonWorkbench",
 ]
 
-ACTIVE_VIEWS = {"projectMap", "schemaMap"}
+ACTIVE_VIEWS = {"projectMap", "schemaMap", "sourceRegister"}
 
 
 def _sidebar():
@@ -73,6 +74,8 @@ def _main_content():
         render_project_map()
     elif view == "schemaMap":
         render_schema_map()
+    elif view == "sourceRegister":
+        render_source_register()
     else:
         st.info(t("status.notStarted"))
 

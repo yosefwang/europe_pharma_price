@@ -12,7 +12,8 @@ from i18n import t
 PHASES = [
     ("p0", "completed"),
     ("p1", "completed"),
-    ("p2", "not_started"),
+    ("p2", "completed"),
+    ("p3", "not_started"),
     ("p3", "not_started"),
     ("p4", "not_started"),
     ("p5", "not_started"),

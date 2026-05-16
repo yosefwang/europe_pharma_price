@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "c2a16ff6-d59c-44aa-a76d-03f13160a7d0",
+  "source_id": "src-fr-ameli",
+  "country_code": "FR",
+  "snapshot_date": "2024-04-01",
+  "fetched_at": "2024-04-01T10:00:00+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "sample-prix-fabricant.csv",
+      "file_hash": "sha256:f47f9f69bdd07cf94b81b294d4492945a8374f9006be1ed78a7072daccf81fda",
+      "file_size_bytes": 289,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.ameli.fr/medicaments-prix-fabricant",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Test fixture for Ameli — Base prix médicaments"
+}

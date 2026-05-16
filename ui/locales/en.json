@@ -149,6 +149,61 @@
       "anomalyReport": "Finding that does not fit the system's current assumptions"
     }
   },
+  "source": {
+    "title": "Source Register",
+    "subtitle": "National pricing publication endpoints and capture status",
+    "noSources": "No sources registered yet",
+    "selectSource": "Select a source to view its snapshots",
+    "sources": "Sources",
+    "snapshots": "Snapshots",
+    "noSnapshots": "No snapshots captured for this source",
+    "fields": {
+      "sourceName": "Source name",
+      "sourceUrl": "URL",
+      "sourceType": "Format",
+      "updateFrequency": "Update frequency",
+      "fetchMethod": "Fetch method",
+      "robotsTxt": "robots.txt compliant",
+      "tosReviewed": "ToS reviewed",
+      "registeredAt": "Registered at",
+      "snapshotDate": "Snapshot date",
+      "fetchedAt": "Fetched at",
+      "fileHash": "File hash",
+      "fileSize": "File size",
+      "filename": "Filename"
+    },
+    "status": {
+      "registered": "Registered",
+      "captured": "Captured",
+      "hashVerified": "Hash verified",
+      "hashMismatch": "Hash mismatch",
+      "pendingManualRefresh": "Pending manual refresh",
+      "blocked": "Blocked by robots/ToS"
+    },
+    "type": {
+      "excel": "Excel",
+      "csv": "CSV",
+      "pdf": "PDF",
+      "html": "HTML",
+      "api": "API",
+      "other": "Other"
+    },
+    "frequency": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "annual": "Annual",
+      "irregular": "Irregular",
+      "unknown": "Unknown"
+    },
+    "fetchMethodLabel": {
+      "automated": "Automated",
+      "manual": "Manual"
+    },
+    "yes": "Yes",
+    "no": "No"
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",

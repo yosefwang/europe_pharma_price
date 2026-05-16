@@ -1,0 +1,4 @@
+PRODUCT_CODE,PRODUCT_NAME,STRENGTH,DOSAGE_FORM,PACK_SIZE,MANUFACTURER,EX_FACTORY_PRICE_EUR
+12345,Paracetamol 500mg Tabs,500mg,tablet,28,Acme Pharma,2.50
+12346,Ibuprofen 200mg Tabs,200mg,tablet,30,Beta Pharma,3.10
+12347,Amoxicillin 500mg Caps,500mg,capsule,21,Gamma Pharma,4.85
