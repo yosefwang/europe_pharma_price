@@ -242,6 +242,45 @@
       "needsReview": "需要审查"
     }
   },
+  "policy": {
+    "title": "政策映射",
+    "subtitle": "各国价格字段到共享比较词汇的映射",
+    "selectInterpretation": "选择一条解释",
+    "noInterpretations": "该国家暂无政策解释",
+    "category": {
+      "manufacturer_price": "厂商端价格",
+      "pharmacy_purchase_price": "药店采购价",
+      "public_retail_price": "公开零售价",
+      "payer_reimbursement_price": "支付方报销价",
+      "unmapped_price_concept": "未映射价格概念",
+      "not_comparable": "不可比较"
+    },
+    "fields": {
+      "priceType": "国家字段",
+      "category": "比较类别",
+      "effectiveFrom": "生效起始",
+      "effectiveTo": "生效截止",
+      "present": "至今",
+      "confidence": "置信度",
+      "vatIncluded": "含 VAT",
+      "margin": "包含利润",
+      "interpretationId": "解释 ID",
+      "interpretationText": "解读",
+      "sourceReferences": "来源引用",
+      "caveats": "注意事项",
+      "adjudicationNotes": "裁定记录",
+      "authoredBy": "作者",
+      "authoredAt": "撰写时间"
+    },
+    "confidence": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "comparable": "可比较",
+    "notComparable": "不可比较 — 需要审查",
+    "needsReview": "需要审查（低置信度）"
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

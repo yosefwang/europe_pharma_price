@@ -242,6 +242,45 @@
       "needsReview": "Needs review"
     }
   },
+  "policy": {
+    "title": "Policy Mapping",
+    "subtitle": "National price fields mapped to the shared comparison vocabulary",
+    "selectInterpretation": "Select an interpretation",
+    "noInterpretations": "No policy interpretations for this country",
+    "category": {
+      "manufacturer_price": "Manufacturer-side price",
+      "pharmacy_purchase_price": "Pharmacy purchase price",
+      "public_retail_price": "Public retail price",
+      "payer_reimbursement_price": "Payer reimbursement price",
+      "unmapped_price_concept": "Unmapped price concept",
+      "not_comparable": "Not comparable"
+    },
+    "fields": {
+      "priceType": "National field",
+      "category": "Comparison category",
+      "effectiveFrom": "Effective from",
+      "effectiveTo": "Effective to",
+      "present": "present",
+      "confidence": "Confidence",
+      "vatIncluded": "VAT included",
+      "margin": "Margin coverage",
+      "interpretationId": "Interpretation ID",
+      "interpretationText": "Reading",
+      "sourceReferences": "Source references",
+      "caveats": "Caveats",
+      "adjudicationNotes": "Adjudication notes",
+      "authoredBy": "Authored by",
+      "authoredAt": "Authored at"
+    },
+    "confidence": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "comparable": "Comparable",
+    "notComparable": "Not comparable — review required",
+    "needsReview": "Needs review (low confidence)"
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",
