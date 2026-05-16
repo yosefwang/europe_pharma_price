@@ -12,6 +12,12 @@
     "note": "Unmodified record as extracted from the source document"
   },
   {
+    "id": "country-delegate",
+    "en": "country delegate",
+    "zh-CN": "国家代理",
+    "note": "Component owning one country's pricing publication regime; parses sources into canonical records and surfaces anomalies, but never reads other countries' data"
+  },
+  {
     "id": "canonical-price-record",
     "en": "canonical price record",
     "zh-CN": "规范价格记录",

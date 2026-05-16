@@ -204,6 +204,44 @@
     "yes": "是",
     "no": "否"
   },
+  "country": {
+    "title": "国家工作区",
+    "subtitle": "按国家展示来源文档、原始记录、规范记录和代理输出",
+    "selectCountry": "选择一个国家",
+    "noSnapshots": "该国家暂无规范快照",
+    "noCanonicalRecords": "该快照暂无规范记录",
+    "rawRecords": "原始记录",
+    "canonicalRecords": "规范记录",
+    "delegateReport": "代理报告",
+    "anomalyReport": "异常",
+    "localFieldDescriptions": "本地字段描述",
+    "rawToCanonical": "原始 → 规范 血缘",
+    "selectRecord": "选择一条规范记录以查看其原始来源",
+    "rawForRecord": "对应规范记录的原始记录",
+    "rawFields": "原始字段（按发布）",
+    "fields": {
+      "productName": "产品",
+      "strength": "规格",
+      "dosageForm": "剂型",
+      "packSize": "包装",
+      "manufacturer": "厂商",
+      "price": "价格",
+      "priceType": "价格字段",
+      "nationalCode": "国家编码",
+      "rowIndex": "行号",
+      "rawRecordId": "原始记录 ID",
+      "canonicalId": "规范 ID",
+      "sourceDocumentId": "来源文档 ID"
+    },
+    "delegateState": {
+      "notStarted": "未开始",
+      "sourceCaptured": "已捕获来源",
+      "parsed": "已解析",
+      "canonicalized": "已规范化",
+      "anomalyReported": "已报告异常",
+      "needsReview": "需要审查"
+    }
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

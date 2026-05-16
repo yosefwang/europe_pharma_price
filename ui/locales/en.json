@@ -204,6 +204,44 @@
     "yes": "Yes",
     "no": "No"
   },
+  "country": {
+    "title": "Country Workspace",
+    "subtitle": "Per-country source documents, raw records, canonical records, and delegate output",
+    "selectCountry": "Select a country",
+    "noSnapshots": "No canonical snapshots for this country",
+    "noCanonicalRecords": "No canonical records for this snapshot",
+    "rawRecords": "Raw records",
+    "canonicalRecords": "Canonical records",
+    "delegateReport": "Delegate report",
+    "anomalyReport": "Anomalies",
+    "localFieldDescriptions": "Local field descriptions",
+    "rawToCanonical": "Raw → Canonical lineage",
+    "selectRecord": "Select a canonical record to see its raw source",
+    "rawForRecord": "Raw record for canonical",
+    "rawFields": "Raw fields (as published)",
+    "fields": {
+      "productName": "Product",
+      "strength": "Strength",
+      "dosageForm": "Form",
+      "packSize": "Pack",
+      "manufacturer": "Manufacturer",
+      "price": "Price",
+      "priceType": "Price field",
+      "nationalCode": "National code",
+      "rowIndex": "Row #",
+      "rawRecordId": "Raw record ID",
+      "canonicalId": "Canonical ID",
+      "sourceDocumentId": "Source document ID"
+    },
+    "delegateState": {
+      "notStarted": "Not started",
+      "sourceCaptured": "Source captured",
+      "parsed": "Parsed",
+      "canonicalized": "Canonicalized",
+      "anomalyReported": "Anomaly reported",
+      "needsReview": "Needs review"
+    }
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",

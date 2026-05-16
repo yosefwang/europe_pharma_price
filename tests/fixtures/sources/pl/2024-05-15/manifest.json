@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "4ed118dc-4668-4606-8402-d66f82a047c0",
+  "source_id": "src-pl-mz",
+  "country_code": "PL",
+  "snapshot_date": "2024-05-15",
+  "fetched_at": "2024-05-15T10:00:00+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "sample-cena-listy.csv",
+      "file_hash": "sha256:b2a1c7eb946f175a4fb9bc60ddb171f5a70948a95f397c4f28705e227d911375",
+      "file_size_bytes": 247,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.gov.pl/web/zdrowie/obwieszczenia-ministra-zdrowia-lista-lekow-refundowanych",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Test fixture demonstrating anomaly detection (missing name, unparseable price)"
+}
