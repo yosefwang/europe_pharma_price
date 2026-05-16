@@ -1,0 +1,73 @@
+# 比较报告 — ibuprofen — FR ↔ IE
+
+**快照窗口:** `2024-09-01`
+**生成时间:** `2026-05-16T10:45:06.938682+00:00`
+**候选 ID:** `1cc46fa1-5c51-92c2-46e5-de22cc6b7ced`
+**可用性:** `usable`
+
+## 概要
+
+Comparison of `ibuprofen` `200mg` `tablet` between `FR` and `IE` under category `manufacturer_price`: price ratio 0.8971. Strongest caveat: Confidential CEPS rebates may apply; the published value reflects the gross convention price, not the net realised price.
+
+## 头条数字
+
+- **国家 A 侧 (`FR`)**: 3.05 EUR 每包 200mg; 每规格单位: `0.0005083333333333333333333333335` EUR/strength_unit
+- **国家 B 侧 (`IE`)**: 3.40 EUR 每包 200mg; 每规格单位: `0.0005666666666666666666666666665` EUR/strength_unit
+- **价格比 (A / B)**: `0.8971`
+
+## 为何这些字段可比
+
+Both sides' policy interpretations map their national price field to comparison category `manufacturer_price`.
+
+**FR (PRIX_FABRICANT_EUR)**: PRIX_FABRICANT_EUR (prix fabricant hors taxes, PFHT) is the regulated manufacturer ex-factory price excluding VAT, negotiated between the marketing authorisation holder and the Comité économique des produits de santé (CEPS) under the Code de la sécurité sociale. It is published as the gross convention price, before any confidential rebate.
+
+Sources:
+
+- Code de la sécurité sociale, Article L162-16-4 et seq.
+- Accord-cadre CEPS / Les Entreprises du Médicament (LEEM)
+- https://www.ameli.fr/medicaments-prix-fabricant
+
+**IE (EX_FACTORY_PRICE_EUR)**: EX_FACTORY_PRICE_EUR in the PCRS reimbursement list is the manufacturer ex-factory price excluding VAT and wholesale/pharmacy margin. Under FASPM the ex-factory price is the regulated price at which the marketing authorisation holder sells to the wholesale tier, and is the basis on which downstream payer reimbursement is computed.
+
+Sources:
+
+- https://www.hse.ie/eng/staff/pcrs/methodology/
+- Framework Agreement on the Supply and Pricing of Medicines (FASPM) 2021
+
+## 注意事项
+
+- Confidential CEPS rebates may apply; the published value reflects the gross convention price, not the net realised price.
+- For products under référence aux comparateurs européens, this published value is itself influenced by reference pricing and should not be treated as independently observed.
+- PCRS publication also contains a RETAIL_PRICE_EUR column for some packs; do not confuse these.
+- Ireland participates in BENELUXA reference-pricing arrangements; net prices may differ.
+
+## 证据链
+
+### 国家 A 侧
+
+- `source_document_id`: `37dff0e7-ae29-4e03-94fe-549583d1889c`
+- `raw_record_id`: `4c4c02e3-d546-435c-80d3-ffb8a9d285c8`
+- `canonical_record_id`: `50bbbef7-18dc-4d49-93f5-de27c7f7f0ac`
+- `policy_interpretation_id`: `927bbc42-d5f4-4361-946e-c47be73aa6c2`
+- `data_profile_id`: `b4d1974c-4de7-4cfb-a97e-8edb39346ff2`
+- `derivation_rule_id`: `5c736b92-5cca-00b2-efa0-3c98f23d4a89`
+
+### 国家 B 侧
+
+- `source_document_id`: `fe98bddc-e61e-4114-94af-677bb57f2e32`
+- `raw_record_id`: `067e5a74-3029-431f-868a-24dc121e3143`
+- `canonical_record_id`: `e3c0de4b-467f-4127-ad46-bb83b46ffb12`
+- `policy_interpretation_id`: `129f8938-8cd4-4e4a-b2cf-2702e0763641`
+- `data_profile_id`: `0b947728-fcf0-4bed-a5aa-42c11780ac8b`
+- `derivation_rule_id`: `32f7ab0a-794c-4a3f-7271-b62678dcb5f1`
+
+## 审查评估
+
+- policy_strength: `strong`
+- data_strength: `strong`
+- identity_strength: `strong`
+- normalisation_strength: `strong`
+
+**理由**
+
+policy_strength=strong, data_strength=strong, identity_strength=strong, normalisation_strength=strong; price_ratio=0.8970588235294117647058823535

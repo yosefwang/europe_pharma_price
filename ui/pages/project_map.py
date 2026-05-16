@@ -19,14 +19,7 @@ PHASES = [
     ("p6", "completed"),
     ("p7", "completed"),
     ("p8", "completed"),
-    ("p9", "not_started"),
-    ("p3", "not_started"),
-    ("p4", "not_started"),
-    ("p5", "not_started"),
-    ("p6", "not_started"),
-    ("p7", "not_started"),
-    ("p8", "not_started"),
-    ("p9", "not_started"),
+    ("p9", "completed"),
 ]
 
 INCLUDED_COUNTRIES = ["ireland", "poland", "france"]

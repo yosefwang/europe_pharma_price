@@ -15,6 +15,7 @@ st.set_page_config(
 from i18n import get_locale, set_locale, t  # noqa: E402
 from pages.audit_trail import render_audit_trail  # noqa: E402
 from pages.comparison_candidates import render_comparison_candidates  # noqa: E402
+from pages.comparison_workbench import render_comparison_workbench  # noqa: E402
 from pages.country_workspace import render_country_workspace  # noqa: E402
 from pages.data_health import render_data_health  # noqa: E402
 from pages.policy_mapping import render_policy_mapping  # noqa: E402
@@ -36,7 +37,11 @@ NAV_KEYS = [
     "comparisonWorkbench",
 ]
 
-ACTIVE_VIEWS = {"projectMap", "schemaMap", "sourceRegister", "countryWorkspace", "policyMapping", "dataHealth", "comparisonCandidates", "reviewQueue", "auditTrail"}
+ACTIVE_VIEWS = {
+    "projectMap", "schemaMap", "sourceRegister", "countryWorkspace",
+    "policyMapping", "dataHealth", "comparisonCandidates", "reviewQueue",
+    "auditTrail", "comparisonWorkbench",
+}
 
 
 def _sidebar():
@@ -94,6 +99,8 @@ def _main_content():
         render_review_queue()
     elif view == "auditTrail":
         render_audit_trail()
+    elif view == "comparisonWorkbench":
+        render_comparison_workbench()
     else:
         st.info(t("status.notStarted"))
 
