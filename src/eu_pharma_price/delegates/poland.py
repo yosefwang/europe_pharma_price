@@ -12,6 +12,8 @@ class PolandDelegate(BaseDelegate):
     price_field = "CENA_HURTOWA_PLN"
     field_mapping = {
         "NAZWA": "product_name",
+        "INN": "inn",
+        "ATC": "atc_code",
         "DAWKA": "strength",
         "POSTAC": "dosage_form",
         "OPAKOWANIE": "pack_size",

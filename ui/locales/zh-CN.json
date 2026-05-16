@@ -317,6 +317,52 @@
       "red": "至少一个字段不合理"
     }
   },
+  "candidates": {
+    "title": "比较候选",
+    "subtitle": "带完整证据链的跨国价格比较候选",
+    "selectWindow": "快照窗口",
+    "selectCandidate": "选择一个候选",
+    "noWindows": "暂无候选窗口",
+    "noCandidates": "该窗口暂无候选",
+    "candidate": "候选",
+    "candidatesIn": "候选数",
+    "molecule": "分子",
+    "strength": "规格",
+    "form": "剂型",
+    "category": "比较类别",
+    "pricePerStrength": "单位规格价",
+    "priceRatio": "价格比 (A / B)",
+    "ratioNullCurrencyMismatch": "未计算比值 — 货币不同",
+    "identityConfidence": "身份置信度",
+    "evidenceChain": "证据链",
+    "sideA": "国家 A",
+    "sideB": "国家 B",
+    "links": {
+      "sourceDocument": "来源文档",
+      "rawRecord": "原始记录",
+      "canonicalRecord": "规范记录",
+      "policyInterpretation": "政策解释",
+      "dataProfile": "数据画像",
+      "derivationRule": "派生规则",
+      "comparisonCandidate": "候选 ID"
+    },
+    "confidence": {
+      "exact": "完全匹配",
+      "high": "高",
+      "medium": "中",
+      "low": "低"
+    },
+    "ruleType": {
+      "per_unit": "单位价",
+      "vat_exclusive": "VAT 排除",
+      "vat_inclusive": "VAT 包含",
+      "currency_conversion": "货币换算",
+      "pack_normalisation": "规格归一化"
+    },
+    "candidateNotFinal": "这是候选，并非最终结论 — Review（Phase 7）决定可用性",
+    "skipped": "跳过的国家对",
+    "anomalies": "异常"
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

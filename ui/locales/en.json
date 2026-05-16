@@ -317,6 +317,52 @@
       "red": "At least one field is implausible"
     }
   },
+  "candidates": {
+    "title": "Comparison Candidates",
+    "subtitle": "Proposed cross-country price comparisons with full evidence chain",
+    "selectWindow": "Snapshot window",
+    "selectCandidate": "Select a candidate",
+    "noWindows": "No candidate windows yet",
+    "noCandidates": "No candidates in this window",
+    "candidate": "Candidate",
+    "candidatesIn": "Candidates in",
+    "molecule": "Molecule",
+    "strength": "Strength",
+    "form": "Dosage form",
+    "category": "Comparison category",
+    "pricePerStrength": "Price per strength unit",
+    "priceRatio": "Price ratio (A / B)",
+    "ratioNullCurrencyMismatch": "Ratio not computed — currencies differ",
+    "identityConfidence": "Identity confidence",
+    "evidenceChain": "Evidence chain",
+    "sideA": "Country A",
+    "sideB": "Country B",
+    "links": {
+      "sourceDocument": "Source document",
+      "rawRecord": "Raw record",
+      "canonicalRecord": "Canonical record",
+      "policyInterpretation": "Policy interpretation",
+      "dataProfile": "Data profile",
+      "derivationRule": "Derivation rule",
+      "comparisonCandidate": "Candidate ID"
+    },
+    "confidence": {
+      "exact": "Exact",
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "ruleType": {
+      "per_unit": "Per-unit price",
+      "vat_exclusive": "VAT exclusion",
+      "vat_inclusive": "VAT inclusion",
+      "currency_conversion": "Currency conversion",
+      "pack_normalisation": "Strength normalisation"
+    },
+    "candidateNotFinal": "Candidate, not final claim — Review (Phase 7) decides usability",
+    "skipped": "Skipped pairs",
+    "anomalies": "Anomalies"
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",

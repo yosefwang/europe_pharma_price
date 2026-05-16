@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "fbda035d-e13e-431d-8e40-9a3550591630",
+  "source_id": "src-pl-mz",
+  "country_code": "PL",
+  "snapshot_date": "2024-09-01",
+  "fetched_at": "2024-09-01T10:00:00+00:00",
+  "fetch_method": "automated",
+  "files": [
+    {
+      "filename": "q3-list.csv",
+      "file_hash": "sha256:7166e7ea57375ca51c646686041a2f1e5e178064f7675c0d91a1ca5dab0edbc8",
+      "file_size_bytes": 408,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.gov.pl/web/zdrowie/obwieszczenia-ministra-zdrowia-lista-lekow-refundowanych",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Q3 cross-country fixture (shared INN molecules) for Phase 6"
+}

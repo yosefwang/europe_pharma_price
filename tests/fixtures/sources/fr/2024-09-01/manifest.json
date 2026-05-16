@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "37dff0e7-ae29-4e03-94fe-549583d1889c",
+  "source_id": "src-fr-ameli",
+  "country_code": "FR",
+  "snapshot_date": "2024-09-01",
+  "fetched_at": "2024-09-01T10:00:00+00:00",
+  "fetch_method": "automated",
+  "files": [
+    {
+      "filename": "q3-list.csv",
+      "file_hash": "sha256:a04b4a1f6fc87f2bb8c37fedd62ffdc447261cfcec3a26d69a1de7c2137a61a4",
+      "file_size_bytes": 437,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.ameli.fr/medicaments-prix-fabricant",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Q3 cross-country fixture (shared INN molecules) for Phase 6"
+}

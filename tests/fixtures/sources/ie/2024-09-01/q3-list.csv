@@ -1,0 +1,5 @@
+PRODUCT_CODE,PRODUCT_NAME,INN,ATC_CODE,STRENGTH,DOSAGE_FORM,PACK_SIZE,MANUFACTURER,EX_FACTORY_PRICE_EUR
+22001,Paracetamol Acme 500mg,paracetamol,N02BE01,500mg,tablet,30,Acme Pharma,2.85
+22002,Ibuprofen Beta 200mg,ibuprofen,M01AE01,200mg,tablet,30,Beta Pharma,3.40
+22003,Amoxicillin Gamma 500mg,amoxicillin,J01CA04,500mg,capsule,21,Gamma Pharma,5.25
+22004,Atorvastatin Delta 20mg,atorvastatin,C10AA05,20mg,tablet,28,Delta Pharma,8.10

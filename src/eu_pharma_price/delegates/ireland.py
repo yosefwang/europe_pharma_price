@@ -12,6 +12,8 @@ class IrelandDelegate(BaseDelegate):
     price_field = "EX_FACTORY_PRICE_EUR"
     field_mapping = {
         "PRODUCT_NAME": "product_name",
+        "INN": "inn",
+        "ATC_CODE": "atc_code",
         "STRENGTH": "strength",
         "DOSAGE_FORM": "dosage_form",
         "PACK_SIZE": "pack_size",

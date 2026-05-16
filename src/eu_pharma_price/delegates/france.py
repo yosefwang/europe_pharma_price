@@ -12,6 +12,8 @@ class FranceDelegate(BaseDelegate):
     price_field = "PRIX_FABRICANT_EUR"
     field_mapping = {
         "DENOMINATION": "product_name",
+        "INN": "inn",
+        "ATC": "atc_code",
         "DOSAGE": "strength",
         "FORME": "dosage_form",
         "CONDITIONNEMENT": "pack_size",
