@@ -408,6 +408,35 @@
       "exemptedForThisInstance": "针对本实例豁免"
     }
   },
+  "audit": {
+    "title": "审计跟踪",
+    "subtitle": "将展示的数值追溯到源文件哈希和原始记录",
+    "selectWindow": "窗口",
+    "selectCandidate": "候选",
+    "noWindows": "暂无比较窗口",
+    "noCandidates": "该窗口暂无候选",
+    "chainStatus": "链路状态",
+    "allLinksResolved": "所有链接已解析",
+    "brokenLinks": "断裂链接",
+    "linkResolved": "已解析",
+    "linkBroken": "断裂",
+    "links": {
+      "comparisonCandidate": "比较候选",
+      "reviewAssessment": "审查评估",
+      "derivationRule": "派生规则",
+      "dataProfile": "数据画像",
+      "policyInterpretation": "政策解释",
+      "canonicalRecord": "规范记录",
+      "rawRecord": "原始记录",
+      "sourceDocument": "来源文档",
+      "fileHashVerification": "文件哈希已验证"
+    },
+    "sideA": "国家 A 侧",
+    "sideB": "国家 B 侧",
+    "shared": "共享（双方）",
+    "viewPayload": "查看负载",
+    "verifySnapshot": "立即验证快照哈希"
+  },
   "ui": {
     "search": "搜索",
     "filter": "筛选",

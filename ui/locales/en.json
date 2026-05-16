@@ -408,6 +408,35 @@
       "exemptedForThisInstance": "Exempted for this instance"
     }
   },
+  "audit": {
+    "title": "Audit Trail",
+    "subtitle": "Trace the displayed figure back to source hash and raw record",
+    "selectWindow": "Window",
+    "selectCandidate": "Candidate",
+    "noWindows": "No comparison windows yet",
+    "noCandidates": "No candidates in this window",
+    "chainStatus": "Chain status",
+    "allLinksResolved": "All links resolved",
+    "brokenLinks": "Broken links",
+    "linkResolved": "Resolved",
+    "linkBroken": "Broken",
+    "links": {
+      "comparisonCandidate": "Comparison candidate",
+      "reviewAssessment": "Review assessment",
+      "derivationRule": "Derivation rule",
+      "dataProfile": "Data profile",
+      "policyInterpretation": "Policy interpretation",
+      "canonicalRecord": "Canonical record",
+      "rawRecord": "Raw record",
+      "sourceDocument": "Source document",
+      "fileHashVerification": "File hash verified"
+    },
+    "sideA": "Country A side",
+    "sideB": "Country B side",
+    "shared": "Shared (across both sides)",
+    "viewPayload": "View payload",
+    "verifySnapshot": "Verify snapshot hash now"
+  },
   "ui": {
     "search": "Search",
     "filter": "Filter",
