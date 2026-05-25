@@ -28,6 +28,8 @@ from ..schemas.review import (
     Usability,
 )
 
+REVIEW_REPORT_ITEM_LIMIT = 100
+
 
 def _stable_id(seed: str) -> str:
     h = hashlib.sha256(seed.encode("utf-8")).hexdigest()
@@ -175,16 +177,25 @@ def _resolve_policy_confidence_and_caveats(
 def _resolve_profile_plausibility(
     repo_root: Path, country_code: str, snapshot_date: str, profile_id: str,
 ) -> str:
-    p = (
+    requested_profile_path = (
         repo_root / "data" / "profiles" / country_code.lower()
         / snapshot_date / "data_profile.json"
     )
-    if not p.exists():
-        return "implausible"
-    payload = json.loads(p.read_text(encoding="utf-8"))
-    for entry in payload["profiles"]:
-        if entry["id"] == profile_id:
-            return entry["plausibility_assessment"]
+    candidate_paths = []
+    if requested_profile_path.exists():
+        candidate_paths.append(requested_profile_path)
+
+    country_profile_dir = repo_root / "data" / "profiles" / country_code.lower()
+    if country_profile_dir.exists():
+        for path in sorted(country_profile_dir.glob("*/data_profile.json"), reverse=True):
+            if path not in candidate_paths:
+                candidate_paths.append(path)
+
+    for path in candidate_paths:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        for entry in payload["profiles"]:
+            if entry["id"] == profile_id:
+                return entry["plausibility_assessment"]
     return "implausible"
 
 
@@ -259,6 +270,23 @@ def write_review_artifacts(
             }) + "\n")
 
     rep_path = rep_dir / f"{snapshot_window_id}.md"
+    rep_path.write_text(
+        "\n".join(_render_review_report_lines(snapshot_window_id, assessments)),
+        encoding="utf-8",
+    )
+
+    return {
+        "assessments": assess_path,
+        "queue": queue_path,
+        "report": rep_path,
+    }
+
+
+def _render_review_report_lines(
+    snapshot_window_id: str,
+    assessments: list[ReviewAssessment],
+    item_limit: int = REVIEW_REPORT_ITEM_LIMIT,
+) -> list[str]:
     counts = {u.value: 0 for u in Usability}
     for a in assessments:
         counts[a.usability.value] += 1
@@ -270,8 +298,15 @@ def write_review_artifacts(
     for label, count in counts.items():
         lines.append(f"- `{label}`: {count}")
     if assessments:
-        lines.extend(["", "## Items", ""])
-        for a in assessments:
+        shown = assessments[:item_limit]
+        lines.extend([
+            "",
+            "## Items",
+            "",
+            f"**Items shown:** {len(shown)} of {len(assessments)}",
+            "",
+        ])
+        for a in shown:
             lines.append(
                 f"- `{a.id[:8]}…` candidate `{a.comparison_candidate_id[:8]}…` "
                 f"→ **{a.usability.value}** "
@@ -285,10 +320,9 @@ def write_review_artifacts(
                     lines.append(f"    - blocker: {b}")
             for c in a.caveats:
                 lines.append(f"    - caveat: {c}")
-    rep_path.write_text("\n".join(lines), encoding="utf-8")
-
-    return {
-        "assessments": assess_path,
-        "queue": queue_path,
-        "report": rep_path,
-    }
+        omitted = len(assessments) - len(shown)
+        if omitted > 0:
+            lines.append(
+                f"- ... {omitted} additional assessments omitted from this summary."
+            )
+    return lines

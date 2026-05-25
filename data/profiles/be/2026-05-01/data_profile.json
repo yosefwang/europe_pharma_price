@@ -1,0 +1,92 @@
+{
+  "country_code": "BE",
+  "snapshot_date": "2026-05-01",
+  "snapshot_status": "yellow",
+  "assessed_at": "2026-05-24T13:59:24.286996+00:00",
+  "profiles": [
+    {
+      "id": "604b2a76-c4e5-4fd1-992c-3c7270670bb8",
+      "country_code": "BE",
+      "snapshot_date": "2026-05-01",
+      "price_type": "price_amount",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "suspect",
+      "record_count": 4946,
+      "assessed_at": "2026-05-24T13:59:24.279340Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": "0.62",
+      "max_value": "18858.0",
+      "median_value": "17.92",
+      "null_count": 0,
+      "outlier_count": 799,
+      "distribution_notes": "min=0.62 median=17.92 max=18858.00 n=4946",
+      "comparison_to_prior": null,
+      "issues": [
+        "outlier rate 16.15% exceeds warning threshold"
+      ]
+    },
+    {
+      "id": "91ee9643-e1da-41dc-9c36-65c7211a403d",
+      "country_code": "BE",
+      "snapshot_date": "2026-05-01",
+      "price_type": "price_currency",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 4946,
+      "assessed_at": "2026-05-24T13:59:24.279739Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "distinct=['EUR']",
+      "comparison_to_prior": null,
+      "issues": []
+    },
+    {
+      "id": "d1d8348d-1713-4062-aa0e-4f710d3f7325",
+      "country_code": "BE",
+      "snapshot_date": "2026-05-01",
+      "price_type": "snapshot_date",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 4946,
+      "assessed_at": "2026-05-24T13:59:24.284377Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "all_match=True future_dated=0",
+      "comparison_to_prior": null,
+      "issues": []
+    },
+    {
+      "id": "7b57e1ce-d40d-498f-86ca-b30573eb5675",
+      "country_code": "BE",
+      "snapshot_date": "2026-05-01",
+      "price_type": "dosage_form_normalization",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "suspect",
+      "record_count": 4946,
+      "assessed_at": "2026-05-24T13:59:24.286696Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "confidence={'adequate': 4788, 'weak': 158} rule_id_population=1.0000 unmapped=['solution']",
+      "comparison_to_prior": null,
+      "issues": [
+        "1 unmapped dosage-form values"
+      ]
+    }
+  ]
+}

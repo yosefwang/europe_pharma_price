@@ -7,6 +7,12 @@ from .capture import (
     verify_snapshot,
     write_manifest,
 )
+from .belgium_inami import (
+    SHEET_NAME,
+    build_inami_manifest,
+    read_inami_workbook,
+    write_inami_extract,
+)
 from .models import (
     FetchMethod,
     FileEntry,
@@ -25,9 +31,13 @@ __all__ = [
     "SourceStatus",
     "SourceType",
     "UpdateFrequency",
+    "SHEET_NAME",
+    "build_inami_manifest",
     "compute_file_hash",
     "load_register",
+    "read_inami_workbook",
     "snapshot_exists",
     "verify_snapshot",
+    "write_inami_extract",
     "write_manifest",
 ]

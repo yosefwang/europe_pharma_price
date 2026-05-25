@@ -22,6 +22,12 @@ class CanonicalPriceRecord(BaseModel):
     price_currency: str = Field(min_length=3, max_length=3)
     price_type: str
     price_includes_vat: bool | None = None
+    dosage_form_raw: str | None = None
+    dosage_form_attributes: list[str] = Field(default_factory=list)
+    dosage_form_normalization_method: str | None = None
+    dosage_form_normalization_confidence: str | None = None
+    dosage_form_rule_id: str | None = None
+    dosage_form_caveat: str | None = None
 
     manufacturer: str | None = None
     national_product_code: str | None = None

@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "pt-infomed-full-2026-05-23",
+  "source_id": "src-pt-infomed",
+  "country_code": "PT",
+  "snapshot_date": "2026-05-23",
+  "fetched_at": "2026-05-23T13:56:24.030192+00:00",
+  "fetch_method": "scripted_jsf_capture",
+  "files": [
+    {
+      "filename": "infomed.csv",
+      "file_hash": "sha256:6d5f5337632c15a86ffc895aaa3dc4141fde87dc4e05d16ea4645b64d6428280",
+      "file_size_bytes": 2078167,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://extranet.infarmed.pt/INFOMED-fo/",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Full internal research extract from Infomed advanced-search ATC level-5 enumeration. The source list export does not include PVP, so the capture opened each medicine detail page and retained numeric presentation-level PVP rows in infomed.csv. atc_options.csv is retained as capture metadata and is not a delegate input file."
+}

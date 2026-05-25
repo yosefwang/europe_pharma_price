@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "it-aifa-classe-a-2026-05-22",
+  "source_id": "src-it-aifa-classe-a",
+  "country_code": "IT",
+  "snapshot_date": "2026-05-22",
+  "fetched_at": "2026-05-22T23:22:00+00:00",
+  "fetch_method": "automated",
+  "files": [
+    {
+      "filename": "classe_a_per_principio_attivo.csv",
+      "file_hash": "sha256:de31dace33ca49be593bd1d9f20b33cc7e6b2f5abefaff458daaf033d890cc5f",
+      "file_size_bytes": 1479110,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://www.aifa.gov.it/documents/20142/3635001/Classe_A_per_principio_attivo_30-10-2025.csv",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "AIFA Class A per active ingredient CSV. Primary lane used here is 'Prezzo al pubblico' mapped to public_retail_price."
+}

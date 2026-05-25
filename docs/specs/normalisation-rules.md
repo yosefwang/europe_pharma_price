@@ -54,6 +54,25 @@ Each derived value carries a `DerivationRule` ID with:
 - `effective_from` = the snapshot date
 - `source_reference` = `"docs/specs/normalisation-rules.md"`
 
+## Price-Lane Derivation
+
+Some countries publish one dispensing-stage price while law or official
+methodology defines a stable relationship to another stage. These
+transformations are not inferred by the normalisation layer. They are declared
+by Policy Intelligence as `PolicyInterpretation.derivation_rules` and executed
+as auditable `DerivationRule(rule_type = price_lane_derivation)` records.
+
+Examples:
+
+- IE observed `Reimbursement Price` can derive manufacturer ex-factory price by
+  reversing the statutory wholesale markup.
+- ES/PT/IT observed public retail prices can derive manufacturer/PVA lanes only
+  where the policy rule records the official conversion factor or tier table.
+
+Derived lanes remain comparable when their final `comparison_category`,
+`vat_position`, and `margin_position` match observed lanes. Reports and evidence
+must still show that the value is derived and cite the policy rule used.
+
 ## Currency Handling (deferred)
 
 Currency conversion is **out of scope for Phase 6**. Candidates are only generated between countries sharing a currency, OR with `price_ratio` left null when currencies differ. Cross-currency comparison requires a separate `currency_conversion` derivation rule with explicit FX source and date — added in a later phase or by ad hoc decision.

@@ -1,200 +1,343 @@
-# CLAUDE.md
+# Published Medicine Price Comparison / 公开药价可比较底座
 
-> **Project charter for `eu-pharma-prices`.** This is the constitutional layer: purpose, principles, scope, commitments. It does *not* specify implementation. Execution plans, schemas, agent prompts, and code-level decisions are produced by downstream work (in `docs/specs/`, `decisions/`, and code) under the constraints this charter sets.
->
-> **How to use this document.** Treat sections marked *stable commitment* as binding — changing them is a deliberate amendment, recorded in `decisions/`. Treat sections marked *working hypothesis* as the project's current best guess — they exist to be tested against real data and revised when reality pushes back. When a downstream artifact and this charter disagree, the rule depends on which kind of section: stable commitments override the artifact, working hypotheses are amended by it.
->
-> **The discipline this charter tries to keep.** Direction without micromanagement. Abstraction without vagueness. No checklist that pretends to enumerate the future. No design choice frozen before real data has had a chance to argue with it.
+This README is written for policy readers. It explains what the project is trying
+to make comparable, why that is difficult, and how the policy interpretation and
+data evidence are kept connected.
+
+本 README 面向政策制定者和政策研究者。它用尽量平易近人的语言说明：这个项目要比较什么、为什么药价不能直接比较、以及系统如何把政策解释和数据证据连在一起。
+
+## 中文版
+
+### 这个项目想解决什么问题
+
+各国都会公布药品价格，但这些价格经常不是同一种东西。
+
+一个国家公布的可能是出厂价，另一个国家公布的是药房采购价，还有一个国家公布的是含税零售价。即使药品名称看起来相同，剂量、剂型、包装、税、批发加成、药房加成、报销规则也可能不同。把这些数字直接放在一张表里比较，容易得到一个看似精确、实际误导的结论。
+
+这个项目的目标不是简单收集更多国家的价格，而是建立一个可审计的比较底座：
+
+> 当我们说某个药在 A 国比 B 国贵或便宜时，系统必须说明：比较的是哪一种价格、这个价格在该国政策中是什么意思、是否含税、是否含批发或药房加成、是否由法规公式推导而来、以及数据是否足够可靠。
+
+目前项目已经把七个国家接入同一个比较底座：
+
+| 国家 | 当前状态 | 主要可比较价格基础 |
+|---|---|---|
+| Ireland (`IE`) | 已接入 | 药房采购价；可依法规推导出厂价 |
+| Poland (`PL`) | 已接入 | 原生出厂价、批发价、零售价等多价格层次 |
+| Czechia (`CZ`) | 已接入 | 原生出厂价及药房/零售价格上限 |
+| Spain (`ES`) | 已接入 | 原生含税零售价；可按官方转换规则推导出厂价 |
+| Italy (`IT`) | 已接入 | 原生公众零售价；可按 Class A 规则推导出厂价 |
+| Portugal (`PT`) | 已接入 | 原生公众零售价；可按 Infarmed 规则推导出厂价 |
+| Belgium (`BE`) | 已接入 | INAMI/RIZIV 原生出厂价 |
+
+系统已经生成一个七国可比较索引，包含 `BE/CZ/ES/IE/IT/PL/PT`，共 94,322 行可查询的价格-lane 记录。这个索引不是简单的两两配对，而是一个跨国可比较底座。
+
+### 为什么不能直接比较药价
+
+举一个简化例子：
+
+- 比利时公布 `SPB_PRICE`，政策解释为不含 VAT、不含标准批发/药房加成的出厂价。
+- 爱尔兰公开的是药房采购/报销价格，但根据约束性规则，可以倒推出不含加成的出厂价。
+- 西班牙公开的是含 VAT 的公众零售价，系统必须先按官方转换表扣除税和标准零售结构，才能得到一个可比较的出厂价估计。
+
+如果把这三个原始数字直接比较，就是把出厂价、药房采购价和含税零售价混在一起。项目的设计正是为了避免这种情况。
+
+### 核心设计：政策-数据双齿轮
+
+系统的核心可以理解为两个齿轮同时转动。
+
+**第一齿轮：政策解释**
+
+每个国家的每个价格字段，都先由政策解释层判断它是什么意思。例如：
+
+- 是否是 manufacturer price / 出厂价？
+- 是否是 pharmacy purchase price / 药房采购价？
+- 是否是 public retail price / 公众零售价？
+- 是否含 VAT？
+- 是否包含批发加成、药房加成或固定费用？
+- 如果不是出厂价，是否有法律或官方方法可以推导出厂价？
+
+这些解释不是写在代码里的猜测，而是可审计的结构化 policy interpretation。每条解释都带有来源、有效日期、信心等级和 caveats。
+
+**第二齿轮：数据检查**
+
+政策说某个字段可以用，还不够。数据层还要检查：
+
+- 这个字段在实际文件中是否存在；
+- 是否有足够多的非空价格；
+- 价格是否为正；
+- 分布是否异常；
+- 货币、日期、剂型、剂量、包装是否可解析。
+
+只有政策齿轮和数据齿轮都通过，一个价格字段才会进入比较。
+
+### AI 在这里做什么
+
+这个项目是 AI-native 的，但不是让 AI 随便算价格。
+
+AI/agent 适合做政策解释：阅读国家政策文件、理解价格字段含义、判断税和加成、提出可推导公式。确定之后，这些解释被写成结构化文件。
+
+真正的数字计算由确定性代码完成，例如：
+
+- 每片、每毫克价格换算；
+- 汇率换算；
+- 从含税零售价推导出厂价；
+- 剂量、剂型、包装归一化；
+- INN、ATC、商品名之间的身份匹配。
+
+一句话：AI 负责解释政策，代码负责执行计算。
+
+### 新增一个国家时，系统如何运转
+
+这个项目的卖点不只是“有 AI”，而是把 AI 放在正确的位置：让不同 agent 分工阅读、解释和审查政策含义，再把这些解释交给稳定的 normaliser 和计算层执行。以新增一个国家为例，系统会这样一步步工作：
+
+1. **国家 delegate 先理解本国资料。** 它只负责这个国家：找到官方价格文件，保留原始证据，识别国家自己的字段、药品名称、剂量、包装、货币和发布时间。它不直接和别国比较，避免把跨国判断混进本国解析。
+2. **Policy Intelligence 解释价格含义。** 它阅读法规、说明文件和字段定义，判断每个价格到底是出厂价、药房采购价、报销价还是公众零售价；是否含 VAT；是否包含批发或药房加成；如果不是目标价格基础，能否按法律或官方公式推导。
+3. **数据齿轮反查政策判断。** 如果政策说某个字段是可用价格，数据 profile 会检查它在真实文件里是否存在、是否足够完整、价格是否合理、药品身份和剂量剂型是否能被解析。政策解释和数据表现必须相互印证。
+4. **Normaliser 把本国语言翻译成共同语言。** 它把 INN、ATC、商品名、活性成分、剂量、剂型、给药路径、包装数量、货币、每片价格、每毫克价格等统一到共同字段。这里不是“猜相似药”，而是把同一个药品 presentation 放进可比较的坐标系。
+5. **Derivation layer 生成可比较价格 lane。** 如果国家原生公布出厂价，系统保留 observed manufacturer-price lane。如果只公布含税零售价或药房采购价，但法规允许倒推，系统生成 derived manufacturer-price lane，并保留公式、参数、依据和信心等级。
+6. **Secretariat 把国家接入 multinational substrate。** 新国家不是和每个旧国家单独配对，而是进入同一个跨国索引。查询时，系统选择同一 INN、同一剂量、同一剂型、同一给药路径、同一价格基础的 cohort。只有这样，一个国家的价格才会和其他国家真正“苹果对苹果”比较。
+
+这就是双齿轮加 multinational delegate system 的核心：国家 delegate 负责本国事实，policy intelligence 负责语义判断，normaliser 负责共同语言，substrate 负责跨国比较。任何一步证据不足，结果就不会被包装成确定比较。
+
+### 什么叫 multinational substrate
+
+早期比较药价很容易走向“两两国家配对”：IE 对 PL、IE 对 CZ、PL 对 CZ……国家越多，组合越多，很快失控。
+
+本项目现在使用的是 multinational substrate。意思是：
+
+1. 每个国家由自己的 delegate 先完成本国解释和整理；
+2. 每一行都带着自己的政策解释、数据 profile、价格类型、税/加成位置、是否 derived、药品身份、剂量、剂型、包装；
+3. 查询时只取同一价格基础、同一 INN、同一剂量、同一剂型、同一路径的 cohort。
+
+例如要比较 `atorvastatin 20 mg oral solid`，系统不会先生成所有国家两两组合，而是查找七国中满足同一可比较条件的记录。
+
+### 一个实际例子：Belgium 加入七国比较
+
+比利时加入时，系统不是手工写一组“比利时对爱尔兰、比利时对波兰”的规则。Belgium delegate 先读取 INAMI/RIZIV 官方 workbook，Policy Intelligence 再解释其中的 `SPB_PRICE`。这个字段被解释为原生 manufacturer price，不含 VAT，不含标准批发/药房加成。随后数据齿轮检查字段可用性，normaliser 统一 INN、剂量、剂型和每单位价格，最后把 Belgium 放进七国共同 manufacturer-price lane。
+
+它可以和其他国家的 manufacturer-price lane 比较，但其他国家有些是原生价格，有些是政策公式推导价格。系统会保留这个区别。
+
+七国验证中，系统用五个药物检查 Belgium 是否真的进入同一个 manufacturer-price comparison lane：
+
+| 药物 | 可比较规格 | Belgium 相对七国中位数 |
+|---|---|---:|
+| atorvastatin | 20 mg oral solid | 1.38x |
+| olanzapine | 10 mg oral solid | 0.80x |
+| pantoprazole | 40 mg oral solid | 1.63x |
+| clopidogrel | 75 mg oral solid | 0.72x |
+| dapagliflozin | 10 mg oral solid | 1.16x |
+
+这些数字的意思不是“比利时真实净价一定更高或更低”。它们表示：在公开价格、同一分子、同一剂量/剂型、同一 manufacturer-price basis 下，Belgium 在这些验证药物上的相对位置。保密折扣和 managed-entry agreements 不在本项目范围内。
+
+### 原生价格和推导价格都可以比较吗
+
+可以，但必须说清楚。
+
+例如：
+
+- Belgium、Poland、Czechia 有原生 manufacturer-price lane；
+- Ireland、Spain、Italy、Portugal 的 manufacturer-price lane 是从公开价格按法规或官方方法推导出来的。
+
+系统允许原生和推导价格进入同一个可比较 basis，但每一行都会标记 `observed` 或 `derived`，并保存推导公式、参数和法律/官方依据。这样政策读者可以看到比较结果，也可以追溯这个结果是直接公布的，还是从另一个公布价格推导出来的。
+
+### 现在已经做了什么
+
+项目目前已经具备以下能力：
+
+- 保存官方来源和抓取/处理证据；
+- 让国家 delegate 将本国发布资料整理成共同可读的记录；
+- 为每个国家价格字段形成可审计的政策解释；
+- 对每次数据快照做可用性和质量检查；
+- 支持 VAT、margin、价格层次的结构化解释；
+- 支持政策驱动的 derived price lane，并明确标记 observed/derived；
+- 支持 INN、ATC、活性成分标签、商品名首词的身份归一；
+- 支持剂量、剂型、包装、货币、每单位/每毫克价格归一；
+- 建立七国 multinational lane index；
+- 生成比利时七国比较报告；
+- 用测试保护六国 baseline 和七国扩展。
+
+### 这个项目不能回答什么
+
+本项目有意不回答以下问题：
+
+- 保密 rebate 之后的真实净价是多少；
+- 医院或 payer 实际成交价是多少；
+- 不同分子之间是否治疗等效；
+- 某个药是否临床上更好；
+- 哪个国家“应该”采用哪个价格政策。
+
+它回答的是更窄但更可靠的问题：在公开、可追溯、可解释的价格基础上，不同国家公布的同一药品价格如何比较，以及这个比较的证据链是什么。
+
+### 下一步
+
+项目下一阶段会继续扩展国家，但不会以覆盖数量为第一目标。优先顺序是：能否拿到官方数据、能否解释价格含义、能否明确 VAT/margin、能否根据法律或官方方法推导可比较基础、能否稳定识别药品身份。
+
+当前 roadmap 中，下一批高优先级国家包括 Sweden、New Zealand、Finland、Switzerland、Greece 等。美国和加拿大暂时不纳入主线，因为它们的保险、PBM、省级/联邦结构更复杂，可能需要不同的底座。
 
 ---
 
-## 1. Purpose *(stable commitment)*
+## English Version
 
-A **comparable data substrate** for the published reimbursement prices of medicines across European national health systems, supporting policy research by researchers and academics — including the project's own authors — doing comparative work.
+### What This Project Is For
 
-The substrate exists to answer one shape of question, repeated across many molecules and many country pairs:
+Countries publish medicine prices, but the published numbers often do not mean the same thing.
 
-> *"How does the published reimbursement price of `<molecule, strength, form>` in country A compare with the published price in country B, and what is the evidence behind that comparison?"*
+One country may publish a manufacturer price. Another may publish a pharmacy purchase price. A third may publish a VAT-inclusive public retail price. Even when the medicine name looks the same, the strength, dosage form, pack size, tax treatment, wholesale margin, pharmacy margin, reimbursement rule, and publication context may differ.
 
-A good answer always names: which national price field on each side, the policy reading that says those fields can be compared, the data behind that reading, and the caveats that travel with the figure.
+This project is not mainly a country-coverage exercise. Its purpose is to build an auditable comparison substrate:
 
-The system does **not** flatten national price concepts into a single global standard. Every country publishes a different family of regulated prices for valid policy reasons — that non-uniformity is a fact about the world the system represents, not a defect it normalises away.
+> When we say that a medicine is more or less expensive in country A than in country B, the system must explain which price field is being compared, what that field means under national policy, whether VAT or margins are included, whether the value is observed or policy-derived, and whether the underlying data are usable.
 
-**Not in purpose:** clinical decision support, real-time market intelligence, scraping anything not voluntarily published, comparison of net negotiated rebated prices (which are not published), inference of therapeutic equivalence across different molecules.
+The current substrate covers seven countries:
 
-## 2. Scope *(stable commitment, with the working choices noted)*
+| Country | Current Status | Main Comparable Basis |
+|---|---|---|
+| Ireland (`IE`) | integrated | observed pharmacy purchase price; policy-derived manufacturer price |
+| Poland (`PL`) | integrated | observed manufacturer, wholesale, public retail, and VAT-inclusive manufacturer lanes |
+| Czechia (`CZ`) | integrated | observed manufacturer price and pharmacy/retail ceiling lanes |
+| Spain (`ES`) | integrated | observed VAT-inclusive public retail price; policy-derived manufacturer price |
+| Italy (`IT`) | integrated | observed public price; policy-derived manufacturer price |
+| Portugal (`PT`) | integrated | observed public retail price; policy-derived manufacturer price |
+| Belgium (`BE`) | integrated | observed INAMI/RIZIV manufacturer price |
 
-**Candidate pool:** the 30 EEA member states plus the United Kingdom and Switzerland — 32 countries. This is an outer limit, not a target. Extending beyond it is a deliberate amendment in `decisions/`.
+The project now has a seven-country lane index covering `BE/CZ/ES/IE/IT/PL/PT`, with 94,322 comparable price-lane rows. It is a multinational comparison substrate, not a matrix of ad hoc country pairs.
 
-**Actual scope:** a subset of the candidate pool, smaller than the pool. The system aims to say useful things about countries it includes; it does not aim to include everyone.
+### Why Prices Cannot Just Be Put Side by Side
 
-**A priori included:** Ireland, Poland, France. Committed from the start; rationale in `decisions/`.
+A simple example:
 
-**A priori excluded:** Germany. Rationale in `decisions/`.
+- Belgium publishes `SPB_PRICE`, interpreted as a VAT-exclusive manufacturer price without standard wholesale or pharmacy margins.
+- Ireland publishes a pharmacy purchase/reimbursement price, but legislation supports deriving a manufacturer-price basis by reversing the statutory markup.
+- Spain publishes a VAT-inclusive public retail price, which must be converted through official tiers before it can be used on a manufacturer-price basis.
 
-**Everything else:** enters actual scope when the agents' assessment supports it and a human confirms. Leaves actual scope when assessment later fails or the source becomes unmaintainable. The criteria are described in §5 and §6.
+Putting these raw numbers side by side would mix manufacturer price, pharmacy purchase price, and VAT-inclusive retail price. The system is designed to prevent that.
 
-## 3. Audience and deliverables
+### The Two-Gear Design: Policy and Data
 
-**Audience *(stable commitment)*:** policy researchers, academics, and the project's own authors. Not clinicians, not the general public, not HTA bodies or government procurement. Reproducibility and citability matter more than presentation polish.
+The project works through two independent gears.
 
-**Deliverables.** Four peer products, each a different view onto the same underlying artifacts:
+**Gear 1: Policy Interpretation**
 
-- a queryable data substrate — immutable dated snapshots plus the policy, profile, comparison, and audit artifacts they depend on;
-- comparison reports — on demand, for a chosen molecule and country pair or cohort, citable to a snapshot date;
-- a Python interface — for embedding the substrate into researchers' own analyses;
-- an interactive UI — for browsing comparisons without writing code, with audit links as first-class navigation.
+For each country and each price field, Policy Intelligence asks:
 
-These four are peers. None is the "real" deliverable that the others lead up to; all consume the same tables. Sequencing among them is driven by real research need.
+- Is this a manufacturer price, pharmacy purchase price, public retail price, payer reimbursement price, or something else?
+- Does it include VAT?
+- Does it include wholesale margins, pharmacy margins, dispensing fees, or fixed fees?
+- If it is not directly a manufacturer price, is there a binding law or official method that supports deriving one?
 
-The specific formats (markdown vs HTML reports, REST vs Python library, web app vs notebook) are *working hypotheses* — what matters is the four functions exist and serve the same substrate.
+These interpretations are auditable structured records. They carry sources, effective dates, confidence levels, caveats, and derivation rules.
 
----
+**Gear 2: Data Profiling**
 
-## 4. Core principles *(stable commitments)*
+Policy meaning is not enough. The data layer checks whether the field is actually present and usable:
 
-These are the principles the system is organised around. Their phrasing here is binding; their implementation is open.
+- Is the field populated?
+- Are prices positive?
+- Is the distribution plausible?
+- Are currency, dates, strength, form, pack size, and product identity usable?
 
-### Two gears: policy judges the data, data reflects the policy
+A price field enters comparison only when both gears pass.
 
-Every comparison rests on two independent pieces of evidence, both required.
+### What AI Does Here
 
-- **Policy interpretation** — for each country and each price field, a reading derived from official sources that says what the field means and how it relates to fields in other countries. Typed, ID'd, sourced, datable, adjudicable.
-- **Data profile** — for each country and each snapshot, an assessment of whether the field the policy reading names actually exists, is populated, and behaves plausibly. Typed, ID'd, sourced, datable.
+The project is AI-native, but not in the sense that AI invents numbers.
 
-A comparison is permitted only when both gears say yes, for both sides. There is no override.
+AI agents are useful for reading policy documents and turning them into structured interpretations: what the price means, whether VAT is included, what margins apply, and whether an official derivation formula exists.
 
-### Traceability
+Numerical work is deterministic code:
 
-Every figure in every output traces, end to end, to:
-- the published document it came from, with hash and fetched-at timestamp;
-- the policy reading that interpreted it;
-- the data profile that admitted it;
-- any numeric transformation applied, with its rule and inputs preserved.
+- per-pack, per-unit, and per-mg calculation;
+- currency conversion;
+- VAT and margin derivation formulas;
+- strength, dosage form, pack-size normalisation;
+- INN, ATC, ingredient-label, and product-name identity matching.
 
-A figure for which any link is missing does not appear. The audit trail is built in from day one, not retrofitted.
+In short: AI interprets policy; code calculates numbers.
 
-### AI interpretation, deterministic calculation
+### How the System Works When a New Country Is Added
 
-LLM agents are first-class reasoning components for tasks that require reading policy documents and saying what they mean. Numeric transformation — currency, per-unit, VAT, identity matching on structured features — is plain code. The boundary is strict and one-directional: agents never modify numeric values; code never invents semantic interpretation.
+The distinctive feature is not simply that the project uses AI. It is that AI is placed at the semantic layer, where policy interpretation is needed, and deterministic normalisers and calculation rules handle the numeric layer. When a new country is added, the system works step by step:
 
-### Raw record preservation, append-only history
+1. **The country delegate first understands the national source.** It works only on that country: finding the official price publication, preserving the original evidence, and identifying local fields, product names, strengths, pack sizes, currencies, and publication dates. It does not compare the country with others.
+2. **Policy Intelligence interprets the price meaning.** It reads legislation, source notes, and field definitions. It decides whether each price is a manufacturer price, pharmacy purchase price, reimbursement price, public retail price, or another national concept; whether VAT is included; whether wholesale or pharmacy margins are included; and whether a target basis can be derived through law or official formula.
+3. **The data gear checks the policy judgement against reality.** If policy says a field can be used, the data profile checks whether it actually exists, is sufficiently populated, has plausible positive prices, and contains product identity, strength, form, and pack information that can be parsed. Policy meaning and data behaviour must support each other.
+4. **The normaliser translates national language into shared language.** It standardises INN, ATC, brand or ingredient labels, strength, dosage form, route, pack size, currency, per-unit price, and per-mg price. This is not guessing that two medicines are similar. It is placing the same medicine presentation into a common coordinate system.
+5. **The derivation layer creates comparable price lanes.** If the country directly publishes a manufacturer price, the system keeps an observed manufacturer-price lane. If it publishes only a VAT-inclusive retail price or pharmacy purchase price but policy supports a reverse calculation, the system creates a derived manufacturer-price lane, with the formula, parameters, legal basis, and confidence kept attached.
+6. **The Secretariat connects the country to the multinational substrate.** The new country is not manually paired with every existing country. It enters one cross-country index. A comparison then selects a cohort with the same INN, strength, dosage form, route, and price basis. That is how the system reaches an apple-to-apple comparison.
 
-The raw record as published is never lost. Snapshots are immutable. Schemas evolve by adding, not by renaming or removing. The repository — Git, on GitHub — is the system's record; a decision not in the repository did not happen.
+This is the operating logic of the two-gear, multinational delegate system: country delegates preserve national facts, Policy Intelligence makes semantic judgements, normalisers create a shared language, and the substrate performs cross-country comparison. If evidence is weak at any step, the system does not turn it into a confident comparison.
 
-### Honest comparison or no comparison
+### What the Multinational Substrate Means
 
-When evidence is weak, the system says so. When fields don't fit, it surfaces that rather than forcing them in. When in doubt, it marks for review and stops. A row in a review queue is recoverable; a silently wrong figure in a report is not.
+A naive system would compare every country pair separately: IE vs PL, IE vs CZ, PL vs CZ, and so on. That quickly becomes hard to maintain and easy to get wrong.
 
----
+This project instead builds one multinational substrate:
 
-## 5. The agent layer *(working hypothesis)*
+1. Each country is first handled by its own delegate.
+2. Each row carries its price meaning, VAT/margin position, observed/derived status, policy ID, data-profile ID, product identity, strength, dosage form, route, pack size, and normalized price.
+3. Comparisons are queries over cohorts: same INN, same strength, same form, same route, and same price-lane basis.
 
-The system is AI-native: agents do the interpretation work, deterministic code does the calculation work, the boundary is enforced. The specific division of agent responsibilities below is the *current best guess* — it will be revised as real data exposes which seams are well-placed and which are not.
+For example, `atorvastatin 20 mg oral solid` is compared by selecting rows that meet the same identity and price-lane conditions across countries, not by manually maintaining country-pair joins.
 
-**Working roles:**
+### Example: Belgium Enters the Seven-Country Comparison
 
-- **Country Delegate** — owns one country's publication regime: locates fields, parses sources, produces canonical records, preserves raw records, describes locally what each price field is and means. Does not assign cross-country meaning.
-- **Policy Intelligence** — reads each country's delegate output plus official policy material, produces typed policy interpretations mapping national fields to a shared comparison vocabulary. Adjudicates between sources.
-- **Analytics** — profiles snapshots, checks that policy-named fields actually exist and are usable in data.
-- **Secretariat** — joins canonical rows across countries, resolves anchors through policy interpretations, applies deterministic normalisation, produces comparison candidates with full evidence.
-- **Review** — assesses candidates end-to-end, assigns usability, refuses to let weak evidence become a headline.
+When Belgium was added, the system did not write one-off rules such as Belgium vs Ireland or Belgium vs Poland. The Belgium delegate first read the official INAMI/RIZIV workbook. Policy Intelligence then interpreted `SPB_PRICE` as an observed VAT-exclusive manufacturer price without standard wholesale or pharmacy margins. The data gear checked that the field was usable, the normaliser standardised INN, strength, form, and unit price, and Belgium then entered the shared seven-country manufacturer-price lane.
 
-**Seams the project does not yet know are well-placed:** whether Policy Intelligence is best as one central agent or one per country; whether the delegate / policy boundary belongs where it currently sits; whether Review is a distinct agent or a deterministic pass. Real data will inform these.
+It can be compared with other manufacturer-price lanes. Some of those lanes are observed; others are derived from official formulas. The system preserves that distinction.
 
-**What stays stable across any future redesign:** the interpretation/calculation split, country-boundary cleanliness (no agent reads another country's data without going through the comparison layer), no internet access at agent runtime (fetching is a separate audited step).
+Five validation medicines show Belgium entering the seven-country manufacturer-price comparison lane:
 
----
+| Medicine | Comparable Presentation | Belgium vs Seven-Country Median |
+|---|---|---:|
+| atorvastatin | 20 mg oral solid | 1.38x |
+| olanzapine | 10 mg oral solid | 0.80x |
+| pantoprazole | 40 mg oral solid | 1.63x |
+| clopidogrel | 75 mg oral solid | 0.72x |
+| dapagliflozin | 10 mg oral solid | 1.16x |
 
-## 6. Comparison vocabulary *(working hypothesis)*
+These are not net-price claims. They are published-price comparisons on a controlled manufacturer-price basis, with confidential rebates and managed-entry agreements explicitly out of scope.
 
-The system needs a vocabulary for *what kind of regulated price* a national field represents, so that comparisons happen between things of compatible kind. The current working vocabulary describes positions in the supply chain: manufacturer-side, payer reimbursement, pharmacy purchase, public retail. Real publication regimes may straddle these, fall outside them, or demand different cuts entirely — that is a finding to feed back, not a problem to silence.
+### Observed and Derived Prices
 
-Whatever the vocabulary turns out to be, two principles are stable:
+Observed and derived values can be compared, but only when the evidence is explicit.
 
-- **No category is privileged.** The system does not prefer one kind of price over another, does not require every country to map to a specific one, and does not silently bridge across categories without an explicit policy-supported rule.
-- **Mappings are decisions, not assertions.** Each national field's mapping to a category is a policy interpretation with provenance, an effective-date window, and an adjudication record. It can be wrong and revisable.
+For example:
 
-Comparisons receive a **usability assessment** combining policy strength, data strength, identity strength, and normalisation strength. The current working scheme uses a small set of labels (roughly: usable, usable-with-caveat, exploratory, not-comparable); the exact granularity is open. **Hard exclusions are stable**: never compare across different molecules, different routes of administration, or therapeutically substitutable but distinct ingredients.
+- Belgium, Poland, and Czechia have observed manufacturer-price lanes.
+- Ireland, Spain, Italy, and Portugal have manufacturer-price lanes derived from published prices using structured policy rules.
 
----
+The substrate allows these rows into the same comparison basis only when their final price meaning aligns. It keeps the observed/derived flag, the derivation formula, parameters, legal basis, and caveats with each row.
 
-## 7. How the system evolves
+### What Has Been Built
 
-### First end-to-end validation
+The project currently supports:
 
-Before the working hypotheses harden, the system must walk one real country pair and one real molecule end to end — every traceability link resolved, reviewed by a human, friction recorded. The choice of pair and molecule belongs to the execution phase, recorded in `decisions/`, chosen to surface real frictions rather than confirm convenient ones.
+- official source preservation and processing evidence;
+- country delegates that translate national publications into shared records;
+- auditable policy interpretations for price fields;
+- data profiles for snapshot quality and usability;
+- explicit VAT, margin, and price-stage semantics;
+- policy-driven derived price lanes, with observed/derived status kept explicit;
+- INN, ATC, ingredient-label, and product-name identity resolution;
+- strength, dosage-form, pack-size, currency, and per-mg normalization;
+- a seven-country multinational lane index;
+- a Belgium seven-country comparison update;
+- regression tests protecting the six-country baseline and Belgium expansion.
 
-Until this validation is met, the working-hypothesis sections of this charter are notional. After it is met, they are revised in the same commit as the design changes that arose.
+### What This Project Does Not Claim
 
-Subsequent validations are chosen for the friction they are expected to produce, not for completeness. Each may revise the working layer of the charter.
+The substrate does not estimate:
 
-### Anomaly surfacing
+- confidential net prices after rebates;
+- hospital tender prices or private transaction prices;
+- clinical or therapeutic equivalence across different molecules;
+- whether one policy is better than another.
 
-Some findings will not fit the system's current assumptions — a price-like thing that is not quite a price, a field that maps to several categories at once or to none cleanly, a distribution plausible for one country but unlike anything seen before, an identifier scheme that breaks expected normalisation. Many such surprises cannot be anticipated; listing them would defeat the purpose.
+It answers a narrower and more reliable question: given published and auditable price evidence, how do comparable prices for the same medicine differ across countries, and what evidence supports the comparison?
 
-A finding of the form *"this does not fit, and it seems important"* is a first-class output of the system. Any agent may produce an **anomaly report** alongside its normal output. The agent surfaces; it does not act. Reports route to humans, who decide among legitimate outcomes — accommodate (extend the design), exempt (handle this instance specifically), exclude (this case is not a fit), or accept with caveat (include with a permanent qualification) — each recorded in `decisions/`.
+### Next Steps
 
-This mechanism is what allows the system to grow toward the real shape of European pharmaceutical pricing rather than away from it. The format of reports and the exact set of outcomes are working hypotheses; the principle is stable.
+The next phase is country expansion, but coverage is not the main goal. A country should enter only when the source is official, the price meaning can be interpreted, VAT and margins can be explained, derivations are legally or officially grounded, and product identity can be normalized.
 
-### Self-healing within limits
-
-The system is allowed to detect, diagnose, and propose. It is never allowed to silently change the meaning of data. Retries, fallback parsing, downgrades to `needs_review`, pull requests proposing rule changes — fine without approval. Applying a schema mapping, changing a derivation rule, accepting a low-confidence match, backfilling history — requires human approval. Every action is in the audit log.
-
----
-
-## 8. Binding operating rules *(stable commitments)*
-
-The principles in §4 and the scope in §2 imply specific Do/Don't rules. Violating any of these corrupts the substrate.
-
-1. **Never invent a value.** Every number traces to a source file hash and a raw record.
-2. **Never silently transform.** Derived values carry their derivation rule and ID; as-published values are preserved.
-3. **Never compare without both gears.** Policy interpretation and data profile both required, on both sides.
-4. **When in doubt, mark for review and stop.** Don't guess into outputs.
-5. **Snapshots are immutable.** Never overwrite a dated partition.
-6. **Currency and date are always explicit.** No bare numbers, no naive datetimes, no FX without source and date.
-7. **Country boundaries are clean.** Cross-country reasoning goes through the comparison layer, not direct joins.
-8. **No agent has internet access at runtime.** Fetching is a separate, audited step.
-9. **Repository-local fixtures only in tests.** Reproducibility is non-negotiable.
-10. **Honor `robots.txt` and ToS.** Manual-refresh sources are marked.
-11. **The repository is the system of record.** Decisions live in `decisions/`; a decision not there did not happen.
-
-These survive any working-hypothesis redesign.
-
----
-
-## 9. Technology orientation
-
-**Stable commitments:**
-
-- **Local-first, no cloud.** State of the system = state of the repository. No hosted services, queues, or managed databases.
-- **Python** as the language. **Pydantic** at every data boundary; no untyped dicts crossing module lines.
-- **DuckDB + Parquet** as the storage and query layer. Snapshots are dated Parquet partitions; analytics are DuckDB over them.
-- **LangGraph + Anthropic Claude** as the agent runtime. Models pinned per agent. Temperature 0 for parsing, matching, and schema-drift tasks.
-- **Git on GitHub** as the canonical record.
-
-**Working choices** (libraries for HTTP, PDF, in-memory data, testing, linting) are picked at the implementation layer in `docs/specs/`, revisable when friction warrants. The orientation is: minimum sufficient set, no speculative dependencies, add the second time a need arises rather than the first.
-
-**Tools explicitly outside scope** until a validation case demonstrates need: cloud infrastructure, vector databases, alternative agent frameworks, heavy scraping frameworks.
-
----
-
-## 10. Known limitations *(stable commitments, surface, do not paper over)*
-
-- Confidential negotiated rebate prices are not published — the dataset reflects published list prices, not net prices.
-- Some authorities publish only confidential assessments — affected countries document the gap.
-- Therapeutic equivalence across different molecules is a clinical/regulatory determination, outside scope.
-- The system represents published price concepts, not negotiated outcomes — findings complement, never replace, formal reference-pricing exercises.
-- Whatever the comparison vocabulary turns out to be, it is coarse by design — it organises comparisons; it does not substitute for reading the underlying policy when stakes are high.
-
----
-
-## 11. Glossary
-
-**ATC** — WHO Anatomical Therapeutic Chemical classification ·
-**BENELUXA** — joint pharmaceutical policy initiative: BE, NL, LU, AT, IE ·
-**EDQM Standard Terms** — European controlled vocabulary for dosage forms, routes, containers ·
-**EEA** — European Economic Area: the 27 EU member states plus Iceland, Liechtenstein, Norway. In-scope set = these 30 + UK + Switzerland ·
-**FASPM** — Framework Agreement on the Supply and Pricing of Medicines (Ireland) ·
-**INN** — International Nonproprietary Name ·
-**UCUM** — Unified Code for Units of Measure
+High-priority future candidates include Sweden, New Zealand, Finland, Switzerland, and Greece. The United States and Canada are deferred because their insurance, PBM, provincial/federal, and rebate structures likely require a different substrate.

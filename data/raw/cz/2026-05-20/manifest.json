@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "sukl-scau-2026-05-20",
+  "source_id": "src-cz-sukl-scau",
+  "country_code": "CZ",
+  "snapshot_date": "2026-05-20",
+  "fetched_at": "2026-05-20T21:26:00+00:00",
+  "fetch_method": "automated",
+  "files": [
+    {
+      "filename": "sukl_scau_all.jsonl",
+      "file_hash": "sha256:71996d15e916b747ca88178f77111e934232813e0bd9f7aed41b0a23534ba2b9",
+      "file_size_bytes": 18351673,
+      "media_type": "application/jsonl"
+    }
+  ],
+  "source_url": "https://prehledy.sukl.gov.cz/dlp/v1/cau-scau/",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "SUKL Seznam cen a uhrad (SCAU) API capture. JSONL contains one API response per product code from the public cau-scau endpoint."
+}

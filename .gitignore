@@ -4,4 +4,11 @@ __pycache__
 *.pyc
 .cursor
 .claude
+.worktrees/
 *.tmp
+data/comparisons/2026-05-16/evidence_bundle.jsonl
+data/comparisons/2026-05-20/evidence_bundle.jsonl
+data/review/2026-05-16/queue.jsonl
+data/review/2026-05-16/review_assessments.jsonl
+data/review/2026-05-20/queue.jsonl
+data/review/2026-05-20/review_assessments.jsonl

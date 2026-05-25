@@ -209,6 +209,79 @@ def _profile_date_coverage(
     )
 
 
+def _profile_dosage_form_normalization(
+    df: pd.DataFrame, country_code: str, snapshot_date: date, assessed_by: str
+) -> DataProfile:
+    record_count = len(df)
+    confidence_field = "dosage_form_normalization_confidence"
+    rule_field = "dosage_form_rule_id"
+    raw_field = "dosage_form_raw"
+    if confidence_field not in df.columns:
+        return DataProfile(
+            id=str(uuid.uuid4()),
+            country_code=country_code,
+            snapshot_date=snapshot_date,
+            price_type="dosage_form_normalization",
+            field_exists=False,
+            population_rate=0.0,
+            plausibility_assessment=PlausibilityAssessment.suspect,
+            record_count=record_count,
+            distribution_notes="normalisation metadata absent",
+            assessed_at=datetime.now(timezone.utc),
+            assessed_by=assessed_by,
+            issues=["dosage-form normalisation metadata absent"],
+        )
+
+    confidence = df[confidence_field].fillna("unknown").astype(str)
+    confidence_counts = {
+        key: int((confidence == key).sum())
+        for key in sorted(confidence.unique())
+    }
+    rule_population = (
+        float(df[rule_field].notna().mean())
+        if rule_field in df.columns and record_count
+        else 0.0
+    )
+    unmapped: list[str] = []
+    if raw_field in df.columns:
+        unmapped_mask = (
+            df.get(rule_field, pd.Series([None] * record_count)).isna()
+            | confidence.isin(["weak", "unknown"])
+        )
+        unmapped = sorted(
+            str(v) for v in df.loc[unmapped_mask, raw_field].dropna().unique()
+            if str(v).strip()
+        )
+
+    issues: list[str] = []
+    plausibility = PlausibilityAssessment.plausible
+    if unmapped:
+        plausibility = PlausibilityAssessment.suspect
+        issues.append(f"{len(unmapped)} unmapped dosage-form values")
+    if rule_population < 0.95:
+        plausibility = PlausibilityAssessment.suspect
+        issues.append(f"rule-id population {rule_population:.2%} below 95%")
+
+    return DataProfile(
+        id=str(uuid.uuid4()),
+        country_code=country_code,
+        snapshot_date=snapshot_date,
+        price_type="dosage_form_normalization",
+        field_exists=True,
+        population_rate=round(float(confidence.notna().mean()) if record_count else 0.0, 4),
+        plausibility_assessment=plausibility,
+        record_count=record_count,
+        distribution_notes=(
+            f"confidence={confidence_counts} "
+            f"rule_id_population={rule_population:.4f} "
+            f"unmapped={unmapped[:20]}"
+        ),
+        assessed_at=datetime.now(timezone.utc),
+        assessed_by=assessed_by,
+        issues=issues,
+    )
+
+
 def _aggregate_status(profiles: list[DataProfile]) -> SnapshotStatus:
     if any(p.plausibility_assessment == PlausibilityAssessment.implausible for p in profiles):
         return SnapshotStatus.red
@@ -235,6 +308,7 @@ def profile_snapshot(
         _profile_price_amount(df, country_code, snapshot_date, assessed_by)[0],
         _profile_currency_consistency(df, country_code, snapshot_date, assessed_by),
         _profile_date_coverage(df, country_code, snapshot_date, assessed_by),
+        _profile_dosage_form_normalization(df, country_code, snapshot_date, assessed_by),
     ]
     return profiles, _aggregate_status(profiles)
 

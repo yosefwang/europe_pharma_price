@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "1c39287b-d6c4-4688-8799-3490660c84dd",
+  "source_id": "src-pl-mz",
+  "country_code": "PL",
+  "snapshot_date": "2026-04-01",
+  "fetched_at": "2026-05-16T12:30:00+00:00",
+  "fetch_method": "automated",
+  "files": [
+    {
+      "filename": "zalacznik-do-obwieszczenia.xlsx",
+      "file_hash": "sha256:d13c9d16eb155be4d0739f08679c039e0bcbf48e3002f0c62eb9c47567a91e3d",
+      "file_size_bytes": 1025742,
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    }
+  ],
+  "source_url": "https://www.gov.pl/attachment/baa46a75-286f-4671-a68d-8646f242a3ff",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Załącznik do obwieszczenia Ministra Zdrowia z dnia 17 marca 2026 r. (effective 1 April 2026). Multi-sheet XLSX with 11 lists (A1, A2, A3, B, C, D1, D2, E, F2, G1, G2). Sheet A1 (community-pharmacy reimbursable medicines) is the primary one for cross-country pricing comparison. Each row has four price columns: Cena zbytu netto (manufacturer net), Urzędowa cena zbytu (official sale price = net + VAT), Cena hurtowa brutto (wholesale gross including VAT), Cena detaliczna (retail)."
+}

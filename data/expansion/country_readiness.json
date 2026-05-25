@@ -1,0 +1,214 @@
+{
+  "countries": [
+    {
+      "country_code": "IE",
+      "country_name": "Ireland",
+      "phase": "baseline",
+      "status": "baseline_complete",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": ["manufacturer_price", "pharmacy_purchase_price"],
+      "blockers": [],
+      "review_notes": ["Existing baseline country."]
+    },
+    {
+      "country_code": "PL",
+      "country_name": "Poland",
+      "phase": "baseline",
+      "status": "baseline_complete",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": ["manufacturer_price", "pharmacy_purchase_price", "public_retail_price"],
+      "blockers": [],
+      "review_notes": ["Existing baseline country."]
+    },
+    {
+      "country_code": "CZ",
+      "country_name": "Czechia",
+      "phase": "baseline",
+      "status": "baseline_complete",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": ["manufacturer_price", "pharmacy_purchase_price"],
+      "blockers": [],
+      "review_notes": ["Existing baseline country."]
+    },
+    {
+      "country_code": "ES",
+      "country_name": "Spain",
+      "phase": "baseline",
+      "status": "baseline_complete",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": ["manufacturer_price", "public_retail_price"],
+      "blockers": [],
+      "review_notes": ["Existing baseline country."]
+    },
+    {
+      "country_code": "IT",
+      "country_name": "Italy",
+      "phase": "baseline",
+      "status": "baseline_complete",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": ["manufacturer_price", "public_retail_price"],
+      "blockers": [],
+      "review_notes": ["Existing baseline country."]
+    },
+    {
+      "country_code": "PT",
+      "country_name": "Portugal",
+      "phase": "baseline",
+      "status": "baseline_complete",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": ["manufacturer_price", "public_retail_price"],
+      "blockers": [],
+      "review_notes": ["Existing baseline country."]
+    },
+    {
+      "country_code": "BE",
+      "country_name": "Belgium",
+      "phase": "phase_1",
+      "status": "complete",
+      "official_sources": [
+        {
+          "name": "INAMI/RIZIV reimbursable specialties reference files",
+          "url": "https://www.inami.fgov.be/",
+          "source_format": "excel",
+          "access_mode": "public_download",
+          "legal_status": "research_use_ok",
+          "notes": ["Reference file descriptions identify ex-factory style fields."]
+        }
+      ],
+      "observed_price_lanes": [
+        {
+          "price_type": "SPB_PRICE",
+          "comparison_category": "manufacturer_price",
+          "vat_position": "vat_exclusive",
+          "margin_position": "no_standard_margins",
+          "confidence": "high",
+          "notes": ["Expected first lane for Belgium."]
+        }
+      ],
+      "derived_price_lanes": [],
+      "identity_fields": ["inn", "strength", "dosage_form", "pack_size", "national_product_code"],
+      "first_comparison_basis": ["manufacturer_price"],
+      "blockers": [],
+      "review_notes": ["Recommended first Phase 1 country.", "Belgium implementation completed on add-belgium."]
+    },
+    {
+      "country_code": "SE",
+      "country_name": "Sweden",
+      "phase": "phase_1",
+      "status": "ready_for_country_plan",
+      "official_sources": [
+        {
+          "name": "TLV open data",
+          "url": "https://www.tlv.se/om-tlv/oppna-data.html",
+          "source_format": "api",
+          "access_mode": "public_api",
+          "legal_status": "research_use_ok",
+          "notes": ["AIP/AUP and margin rules need country-specific plan verification."]
+        }
+      ],
+      "observed_price_lanes": [
+        {
+          "price_type": "AIP",
+          "comparison_category": "pharmacy_purchase_price",
+          "vat_position": "vat_exclusive",
+          "margin_position": "wholesale_margin",
+          "confidence": "high",
+          "notes": ["Pharmacy purchase lane."]
+        }
+      ],
+      "derived_price_lanes": [],
+      "identity_fields": ["inn", "strength", "dosage_form", "pack_size", "national_product_code"],
+      "first_comparison_basis": ["pharmacy_purchase_price", "public_retail_price"],
+      "blockers": [],
+      "review_notes": ["Second Phase 1 country after Belgium."]
+    },
+    {
+      "country_code": "NZ",
+      "country_name": "New Zealand",
+      "phase": "phase_1",
+      "status": "ready_for_country_plan",
+      "official_sources": [
+        {
+          "name": "Pharmac Pharmaceutical Schedule",
+          "url": "https://schedule.pharmac.govt.nz/",
+          "source_format": "xml",
+          "access_mode": "public_download",
+          "legal_status": "research_use_ok",
+          "notes": ["Manufacturer price and subsidy semantics are strong."]
+        }
+      ],
+      "observed_price_lanes": [
+        {
+          "price_type": "Manufacturer's Price",
+          "comparison_category": "manufacturer_price",
+          "vat_position": "vat_exclusive",
+          "margin_position": "no_standard_margins",
+          "confidence": "high",
+          "notes": ["GST-exclusive manufacturer price."]
+        }
+      ],
+      "derived_price_lanes": [],
+      "identity_fields": ["inn", "strength", "dosage_form", "pack_size", "national_product_code"],
+      "first_comparison_basis": ["manufacturer_price", "payer_reimbursement_price"],
+      "blockers": [],
+      "review_notes": ["Third country in first Phase 1 batch."]
+    },
+    {
+      "country_code": "US",
+      "country_name": "United States",
+      "phase": "deferred",
+      "status": "deferred_special_substrate",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": [],
+      "blockers": ["Requires separate substrate design for NADAC/ASP/FUL/MFP and PBM/rebate market structure."],
+      "review_notes": ["Explicitly deferred from this roadmap."]
+    },
+    {
+      "country_code": "CA",
+      "country_name": "Canada",
+      "phase": "deferred",
+      "status": "deferred_special_substrate",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": [],
+      "blockers": ["Requires separate provincial/federal substrate design."],
+      "review_notes": ["Explicitly deferred from this roadmap."]
+    },
+    {
+      "country_code": "HK",
+      "country_name": "Hong Kong",
+      "phase": "excluded",
+      "status": "excluded_from_price_comparison",
+      "official_sources": [],
+      "observed_price_lanes": [],
+      "derived_price_lanes": [],
+      "identity_fields": [],
+      "first_comparison_basis": [],
+      "blockers": ["No stable public item-level price lane identified."],
+      "review_notes": ["Possible future formulary intelligence, not price comparison."]
+    }
+  ]
+}

@@ -21,6 +21,10 @@ See [docs/schemas/policy-interpretation.md](../schemas/policy-interpretation.md)
 - `effective_from`, `effective_to` — the period this reading applies to
 - `source_references` — at least one URL or document ID supporting the reading
 - `interpretation_text` — plain-language reading
+- `semantics` — structured policy-agent decision that records VAT position,
+  margin position, derivation kind, and comparable lane semantics
+- `derivation_rules` — for derived lanes, structured policy-agent decisions
+  that describe how to derive this lane from observed national fields
 - `confidence` — `high`, `medium`, or `low`
 - `authored_at`, `authored_by` — provenance
 - `caveats` — known limitations
@@ -50,6 +54,35 @@ When sources conflict (e.g., a regulation says one thing, a methodology document
 - **Does not perform unit or currency conversions.** Those are derivation rules (Phase 5).
 - **Does not match products across countries.** That's the comparison layer's job.
 - **Does not decide usability.** That's the Review layer (Phase 7).
+- **Does not leave lane semantics to the comparison layer.** Policy
+  Intelligence must emit structured `semantics`; prose fields such as
+  `interpretation_text` and `includes_margin` are explanatory evidence, not
+  machine-control inputs.
+
+## Policy-Derived Lane Graph
+
+Policy Intelligence must make a best-effort attempt to reconstruct comparable
+price lanes when official law, regulation, or methodology gives a stable
+formula. The output is a country-local price-lane graph:
+
+```
+manufacturer_price
+  + wholesale markup
+    -> pharmacy_purchase_price
+      + pharmacy margin + VAT + fees
+        -> public_retail_price
+```
+
+Edges can also be executed in reverse when the policy rule explicitly supports
+the reverse formula. For example, IE publishes `Reimbursement Price` as an
+observed pharmacy-purchase lane, but S.I. 639/2019 supplies the statutory
+wholesale markup. Policy Intelligence therefore records a derivation edge from
+`Reimbursement Price` to `ex-factory (derived)`, and comparison may include IE
+on a manufacturer-price basis while marking the lane as `derived`.
+
+The comparison layer may execute only the structured `derivation_rules`
+attached to a policy interpretation. It must not derive prices from prose,
+country code, or hard-coded assumptions.
 
 ## Storage
 
@@ -60,5 +93,16 @@ Reports are written to `reports/policy/<country>.md` — human-readable summary 
 ## Gating Rule
 
 No comparison candidate may be built from a national field that lacks a current policy interpretation. The comparison layer (Phase 6) enforces this by joining canonical records to interpretations on `(country_code, price_type)` and rejecting any row that does not match.
+
+The current policy interpretation must include `semantics`. The comparison
+layer consumes `semantics.comparison_category`, `semantics.vat_position`,
+`semantics.margin_position`, and `semantics.derivation_kind` directly. It must
+not infer these values from policy prose or margin descriptions.
+
+Derived lane construction additionally requires a current policy interpretation
+whose `derivation_rules` identify the observed source field, target lane,
+formula, parameters, legal basis, confidence, and caveats. Missing derivation
+rules mean no virtual lane is generated, even if older code has a country-level
+formula.
 
 A field with `confidence = low` does not block candidate construction, but the resulting candidate inherits `policy_strength = weak` in its review assessment, which prevents `usable` status (see [review-assessment.md](../schemas/review-assessment.md)).

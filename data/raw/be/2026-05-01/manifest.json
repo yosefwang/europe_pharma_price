@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "be-2026-05-01",
+  "source_id": "src-be-inami",
+  "country_code": "BE",
+  "snapshot_date": "2026-05-01",
+  "fetched_at": "2026-05-24T00:00:00+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "liste_specialites_20260501.xlsx",
+      "file_hash": "sha256:7fcd8443634ad320ee55b8fa6185b554b327692c302e8d0ec8c731a0b94a9bc7",
+      "file_size_bytes": 13643562,
+      "media_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    }
+  ],
+  "source_url": "https://www.inami.fgov.be/fr/themes/soins-de-sante-cout-et-remboursement/les-prestations-de-sante-que-vous-rembourse-votre-mutualite/medicaments/remboursement-d-un-medicament/specialites-pharmaceutiques-remboursables/specialites-pharmaceutiques-remboursables-listes-et-fichiers-de-reference",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Belgium INAMI reimbursable specialties workbook"
+}

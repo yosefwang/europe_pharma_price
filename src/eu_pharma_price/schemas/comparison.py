@@ -10,6 +10,7 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 
 class RuleType(str, Enum):
     per_unit = "per_unit"
+    price_lane_derivation = "price_lane_derivation"
     vat_exclusive = "vat_exclusive"
     vat_inclusive = "vat_inclusive"
     currency_conversion = "currency_conversion"
@@ -21,6 +22,11 @@ class IdentityConfidence(str, Enum):
     high = "high"
     medium = "medium"
     low = "low"
+
+
+class ProductType(str, Enum):
+    generic = "generic"
+    brand = "brand"
 
 
 class DerivationRule(BaseModel):
@@ -76,6 +82,8 @@ class ComparisonCandidate(BaseModel):
     derivation_rule_b_id: str | None = None
     identity_match_method: str | None = None
     identity_confidence: IdentityConfidence | None = None
+    product_type_a: ProductType | None = None
+    product_type_b: ProductType | None = None
     price_ratio: Decimal | None = None
     normalisation_notes: str | None = None
     caveats: list[str] = Field(default_factory=list)

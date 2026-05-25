@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "pt-infomed-targeted-2026-05-22",
+  "source_id": "src-pt-infomed",
+  "country_code": "PT",
+  "snapshot_date": "2026-05-22",
+  "fetched_at": "2026-05-23T00:30:00+00:00",
+  "fetch_method": "manual",
+  "files": [
+    {
+      "filename": "infomed.csv",
+      "file_hash": "sha256:5f84228f87f9f6973ca60fb5a667ec2ef670ff919052bac2afd1c1b9a7fe9c7f",
+      "file_size_bytes": 2154,
+      "media_type": "text/csv"
+    }
+  ],
+  "source_url": "https://extranet.infarmed.pt/INFOMED-fo/",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Targeted internal research extract from Infomed detail pages for Humira, Enbrel, Dupixent, Opdivo, and Keytruda. Numeric PVP rows were extracted into infomed.csv; HTML evidence pages are retained under evidence_html but are not listed as delegate input files. Opdivo and Keytruda searches returned no authorised/commercialised result rows in this capture."
+}

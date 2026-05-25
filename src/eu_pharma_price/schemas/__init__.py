@@ -1,6 +1,7 @@
 """EU Pharma Price evidence chain schemas."""
 
 from .comparison import ComparisonCandidate, DerivationRule
+from .expansion import CountryReadinessAssessment
 from .policy import PolicyInterpretation
 from .profile import DataProfile
 from .records import CanonicalPriceRecord
@@ -11,6 +12,7 @@ __all__ = [
     "AnomalyReport",
     "CanonicalPriceRecord",
     "ComparisonCandidate",
+    "CountryReadinessAssessment",
     "DataProfile",
     "DerivationRule",
     "PolicyInterpretation",

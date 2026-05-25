@@ -10,6 +10,7 @@ class FranceDelegate(BaseDelegate):
     decimal_separator = "."
     encoding = "utf-8"
     price_field = "PRIX_FABRICANT_EUR"
+    price_includes_vat = False
     field_mapping = {
         "DENOMINATION": "product_name",
         "INN": "inn",

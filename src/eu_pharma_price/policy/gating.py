@@ -47,17 +47,17 @@ def interpretation_for_field(
     A current interpretation has effective_from <= on_date and either
     effective_to is None or effective_to >= on_date.
     """
-    for interp in interpretations:
-        if interp.price_type != price_type:
-            continue
-        if interp.effective_from > on_date:
-            continue
-        if interp.effective_to is not None and interp.effective_to < on_date:
-            continue
-        if interp.superseded_by is not None:
-            continue
-        return interp
-    return None
+    candidates = [
+        interp
+        for interp in interpretations
+        if interp.price_type == price_type
+        and interp.effective_from <= on_date
+        and (interp.effective_to is None or interp.effective_to >= on_date)
+        and interp.superseded_by is None
+    ]
+    if not candidates:
+        return None
+    return max(candidates, key=lambda interp: (interp.effective_from, interp.authored_at))
 
 
 def blocks_comparison(

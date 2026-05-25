@@ -1,0 +1,93 @@
+{
+  "country_code": "PT",
+  "snapshot_date": "2026-05-23",
+  "snapshot_status": "yellow",
+  "assessed_at": "2026-05-23T13:57:36.324037+00:00",
+  "profiles": [
+    {
+      "id": "d11f48da-1b63-44ae-8b6b-93f4d01b1ea5",
+      "country_code": "PT",
+      "snapshot_date": "2026-05-23",
+      "price_type": "price_amount",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "suspect",
+      "record_count": 11102,
+      "assessed_at": "2026-05-23T13:57:36.314161Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": "0.7",
+      "max_value": "15589.7",
+      "median_value": "9.64",
+      "null_count": 0,
+      "outlier_count": 1150,
+      "distribution_notes": "min=0.70 median=9.64 max=15589.70 n=11102",
+      "comparison_to_prior": null,
+      "issues": [
+        "outlier rate 10.36% exceeds warning threshold"
+      ]
+    },
+    {
+      "id": "c48c3fb1-47a6-40a1-8756-5f1347ade007",
+      "country_code": "PT",
+      "snapshot_date": "2026-05-23",
+      "price_type": "price_currency",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 11102,
+      "assessed_at": "2026-05-23T13:57:36.314714Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "distinct=['EUR']",
+      "comparison_to_prior": null,
+      "issues": []
+    },
+    {
+      "id": "3da3c19f-b1ba-4482-9505-37f75e0b88cf",
+      "country_code": "PT",
+      "snapshot_date": "2026-05-23",
+      "price_type": "snapshot_date",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 11102,
+      "assessed_at": "2026-05-23T13:57:36.320532Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "all_match=True future_dated=0",
+      "comparison_to_prior": null,
+      "issues": []
+    },
+    {
+      "id": "c2c16d35-21da-48f2-b409-77b1618f56a0",
+      "country_code": "PT",
+      "snapshot_date": "2026-05-23",
+      "price_type": "dosage_form_normalization",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "suspect",
+      "record_count": 11102,
+      "assessed_at": "2026-05-23T13:57:36.323397Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "confidence={'adequate': 10435, 'strong': 24, 'weak': 643} rule_id_population=0.9421 unmapped=['Adesivo cutâneo', 'Adesivo transdérmico', 'Champô', 'Colírio de libertação prolongada', 'Colírio, emulsão', 'Colírio, solução', 'Colírio, solução em recipiente unidose', 'Colírio, suspensão', 'Creme', 'Creme vaginal', 'Dispositivo de libertação intrauterino', 'Emplastro medicamentoso', 'Emulsão cutânea', 'Espuma cutânea', 'Espuma retal', 'Gel intestinal', 'Gel oftálmico', 'Gel vaginal', 'Gotas auriculares, solução', 'Gotas auriculares, solução em recipiente unidose']",
+      "comparison_to_prior": null,
+      "issues": [
+        "63 unmapped dosage-form values",
+        "rule-id population 94.21% below 95%"
+      ]
+    }
+  ]
+}

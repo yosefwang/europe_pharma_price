@@ -1,0 +1,92 @@
+{
+  "country_code": "PL",
+  "snapshot_date": "2026-04-01",
+  "snapshot_status": "yellow",
+  "assessed_at": "2026-05-22T07:59:12.433022+00:00",
+  "profiles": [
+    {
+      "id": "7717d435-fffa-48ef-b62a-93a88e256364",
+      "country_code": "PL",
+      "snapshot_date": "2026-04-01",
+      "price_type": "price_amount",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "suspect",
+      "record_count": 16268,
+      "assessed_at": "2026-05-22T07:59:12.426454Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": "0.78",
+      "max_value": "6921.58",
+      "median_value": "26.13",
+      "null_count": 0,
+      "outlier_count": 1756,
+      "distribution_notes": "min=0.78 median=26.13 max=6921.58 n=16268",
+      "comparison_to_prior": null,
+      "issues": [
+        "outlier rate 10.79% exceeds warning threshold"
+      ]
+    },
+    {
+      "id": "7646083a-f4f3-432f-a57c-5ce79934733f",
+      "country_code": "PL",
+      "snapshot_date": "2026-04-01",
+      "price_type": "price_currency",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 16268,
+      "assessed_at": "2026-05-22T07:59:12.426839Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "distinct=['PLN']",
+      "comparison_to_prior": null,
+      "issues": []
+    },
+    {
+      "id": "0a371457-72cf-40b1-aff9-ba03a6a245dd",
+      "country_code": "PL",
+      "snapshot_date": "2026-04-01",
+      "price_type": "snapshot_date",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "plausible",
+      "record_count": 16268,
+      "assessed_at": "2026-05-22T07:59:12.430658Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "all_match=True future_dated=0",
+      "comparison_to_prior": null,
+      "issues": []
+    },
+    {
+      "id": "a04c70bf-927c-4ad1-8c66-c64dc9d3cbdb",
+      "country_code": "PL",
+      "snapshot_date": "2026-04-01",
+      "price_type": "dosage_form_normalization",
+      "field_exists": true,
+      "population_rate": 1.0,
+      "plausibility_assessment": "suspect",
+      "record_count": 16268,
+      "assessed_at": "2026-05-22T07:59:12.432490Z",
+      "assessed_by": "phase-5-profiler",
+      "min_value": null,
+      "max_value": null,
+      "median_value": null,
+      "null_count": null,
+      "outlier_count": null,
+      "distribution_notes": "confidence={'adequate': 808, 'strong': 14300, 'weak': 1160} rule_id_population=0.9619 unmapped=['concentrate_for_solution_for_infusion', 'granules', 'granules_for_oral_suspension', 'powder', 'solution', 'suppository', 'suspension']",
+      "comparison_to_prior": null,
+      "issues": [
+        "7 unmapped dosage-form values"
+      ]
+    }
+  ]
+}

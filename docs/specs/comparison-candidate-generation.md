@@ -43,22 +43,22 @@ If a researcher needs cross-category comparisons later, that is added through a 
 For each pair of countries (A, B) where A < B alphabetically (no double-counting):
 
 1. Load canonical records, policy interpretations, and data profiles for both sides for the snapshot.
-2. For each canonical record `r_a` in country A:
-   a. Resolve its policy interpretation. If blocked → skip.
-   b. Resolve its data profile. If blocked → skip.
-   c. Parse strength and pack size. If unparseable → emit anomaly, skip.
-3. For each canonical record `r_b` in country B with matching INN, route, form, normalised strength:
-   a. Resolve B's policy interpretation. If blocked → skip.
-   b. Resolve B's data profile. If blocked → skip.
-   c. Confirm shared `comparison_category`. If different → skip.
-   d. Compute per-unit prices via DerivationRules.
-   e. Compute identity confidence (`exact`/`high`/`medium`/`low`).
-   f. Compute `price_ratio` if currencies match; otherwise leave null.
-   g. Construct ComparisonCandidate with all six evidence-link IDs (`raw`, `canonical`, `policy`, `profile` × 2 sides) plus DerivationRule IDs.
-4. Write candidates to:
-   - `data/comparisons/<snapshot_date>/candidates.parquet`
-   - `data/comparisons/<snapshot_date>/evidence_bundle.jsonl`
-5. Write summary to `reports/comparisons/<snapshot_date>/candidate-summary.md`
+2. Enumerate price lanes per country via `_enumerate_price_lanes()`, which applies the two-gear rule (policy gating + data gating). Observed lanes come from canonical records. Virtual lanes are generated only from current policy `derivation_rules`, and each generated row carries its `DerivationRule` evidence.
+3. Match lanes by `comparison_category`. Only same-category lanes generate candidates. Observed and derived lanes may share the same comparable basis when their policy semantics agree; the evidence bundle must preserve whether each side was `observed` or `derived`.
+4. For each matched lane pair:
+   a. **INN normalization**: Run both sides' raw INNs through `InnNormalizer` (two-layer pipeline: linguistic rules → constrained fuzzy). Rows whose INN cannot be normalized are dropped.
+   b. Parse strength and pack size for each row. If unparseable → dropped.
+   c. Build INN-blocked index on canonical INN forms for fast lookup.
+   d. For each matching INN pair, run `assess_identity()` on form, route, strength, pack size.
+   e. For passing pairs, compute per-unit and per-strength-unit prices via `derive_per_unit_price()`.
+   f. If currencies differ, apply FX conversion via `convert_currency()` (ECB rates from `data/fx/ecb_rates.jsonl`).
+   g. Compute `price_ratio` from the (possibly FX-converted) per-strength-unit prices.
+   h. Construct `ComparisonCandidate` with full evidence chain (canonical IDs, policy IDs, profile IDs, derivation rule IDs, FX rule ID) plus ATC code from WHO dictionary.
+5. Write candidates to:
+   - `data/comparisons/<snapshot_window_id>/candidates.parquet`
+   - `data/comparisons/<snapshot_window_id>/evidence_bundle.jsonl`
+   - `data/comparisons/<snapshot_window_id>/derivation_rules.jsonl`
+6. Write summary to `reports/comparisons/<snapshot_window_id>/candidate-summary.md`
 
 ## Candidate ≠ Final Claim
 

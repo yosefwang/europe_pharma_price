@@ -6,14 +6,29 @@ S.I. 639/2019 — i.e., ex-factory + 8% wholesale mark-up (12% for fridge
 items), excluding VAT. The PolicyInterpretation maps this to the
 `pharmacy_purchase_price` comparison category.
 
-Decision: see decisions/003-pcrs-reimbursement-price-is-pharmacy-purchase-price.md
+Per decisions/005, rows with Reimbursement Price = 0 are filtered out and
+emit a `policy_gap` anomaly instead. These are administrative markers
+(High Tech medicines, reference-priced items, special-claim items) — not
+pricing data — and including them as canonical records pollutes the
+data profile.
+
+Decisions: see decisions/003 and decisions/005.
 """
 
 from __future__ import annotations
 
 import re
+import uuid
+from datetime import date, datetime, timezone
 from typing import Any
 
+from ..schemas.records import CanonicalPriceRecord
+from ..schemas.review import (
+    AnomalyReport,
+    AnomalyStatus,
+    AnomalyType,
+    Severity,
+)
 from ..schemas.source import RawRecord
 from .base import BaseDelegate
 
@@ -75,6 +90,7 @@ class IrelandDelegate(BaseDelegate):
     decimal_separator = "."
     encoding = "utf-8"
     price_field = "Reimbursement Price"
+    price_includes_vat = False
     field_mapping = {
         "Drug Name": "product_name",
         "INN": "inn",
@@ -108,3 +124,43 @@ class IrelandDelegate(BaseDelegate):
     def _derive_fields(self, raw_record: RawRecord) -> dict[str, Any]:
         drug_name = raw_record.raw_fields.get("Drug Name", "")
         return {"dosage_form": _extract_dosage_form(drug_name)}
+
+    def _make_canonical(
+        self,
+        raw_record: RawRecord,
+        snapshot_date: date,
+        source_document_id: str,
+    ) -> tuple[CanonicalPriceRecord | None, AnomalyReport | None]:
+        """Override base to filter zero-priced rows per decisions/005.
+
+        These rows are administrative markers (High Tech, reference-priced,
+        special-claim items), not pricing data. They are not silent drops:
+        each one emits a low-severity policy_gap anomaly with full
+        provenance back to the raw record.
+        """
+        raw_value = raw_record.raw_fields.get(self.price_field, "")
+        coerced = self._coerce_price(str(raw_value)) if raw_value else None
+        if coerced is not None and coerced == 0:
+            code = raw_record.raw_fields.get("Code", "")
+            return None, AnomalyReport(
+                id=str(uuid.uuid4()),
+                country_code=self.country_code,
+                anomaly_type=AnomalyType.policy_gap,
+                severity=Severity.low,
+                title="Zero-priced row excluded from canonical (decisions/005)",
+                description=(
+                    f"PCRS row {raw_record.row_index} (Code={code}) has "
+                    f"Reimbursement Price=0.0; this is an administrative "
+                    f"marker for High Tech / reference-priced / special-"
+                    f"claim items, not pricing data. Per decisions/005 it "
+                    f"is filtered from canonical and recorded here."
+                ),
+                evidence=[raw_record.id],
+                reported_at=datetime.now(timezone.utc),
+                reported_by=f"delegate.{self.country_code.lower()}",
+                status=AnomalyStatus.open,
+                affected_records=[raw_record.id],
+            )
+        return super()._make_canonical(
+            raw_record, snapshot_date, source_document_id,
+        )

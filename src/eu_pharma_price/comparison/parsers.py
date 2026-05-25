@@ -47,7 +47,8 @@ _STRENGTH_PATTERNS = [
         r"^\s*([0-9]+(?:\.[0-9]+)?)\s*(?:mcg|µg|ug)\s*$", re.IGNORECASE,
     )),
     ("[iU]", re.compile(
-        r"^\s*([0-9]+(?:\.[0-9]+)?)\s*(?:IU|iu)\s*$", re.IGNORECASE,
+        r"^\s*([0-9]+(?:\.[0-9]+)?)\s*(?:IU|iu|j\.?\s*m\.?)\s*$",
+        re.IGNORECASE,
     )),
     ("%", re.compile(r"^\s*([0-9]+(?:\.[0-9]+)?)\s*%\s*$")),
 ]
@@ -89,6 +90,18 @@ _PACK_PATTERNS = [
         r"^\s*([0-9]+)\s*(?:tab|tabs|tablet|tablets|caps|capsules|"
         r"tabletka|tabletki|kapsu[lł]ka|kapsu[lł]ki|comprime|comprimes|"
         r"comprimés|comprimé|gélule|gélules|gelule|gelules)\s*$",
+        re.IGNORECASE,
+    )),
+    ("polish_szt", re.compile(
+        r"^\s*([0-9]+)\s*szt\.?\s*$",
+        re.IGNORECASE,
+    )),
+    ("polish_fiol", re.compile(
+        r"^\s*([0-9]+)\s*fiol\.?\s*$",
+        re.IGNORECASE,
+    )),
+    ("polish_amp", re.compile(
+        r"^\s*([0-9]+)\s*amp\.?\s*$",
         re.IGNORECASE,
     )),
     ("count_x_volume", re.compile(

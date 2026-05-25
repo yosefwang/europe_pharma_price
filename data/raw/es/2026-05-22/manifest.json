@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "es-nomenclator-2026-05-22",
+  "source_id": "src-es-nomenclator",
+  "country_code": "ES",
+  "snapshot_date": "2026-05-22",
+  "fetched_at": "2026-05-22T23:22:00+00:00",
+  "fetch_method": "automated",
+  "files": [
+    {
+      "filename": "nomenclator.xls",
+      "file_hash": "sha256:b30f7ff1cbadc8f4442a7b64715ec5ff5eda7e24b3dd1e713a105546617454e3",
+      "file_size_bytes": 7271424,
+      "media_type": "application/vnd.ms-excel"
+    }
+  ],
+  "source_url": "https://www.sanidad.gob.es/profesionales/nomenclator.do?metodo=nomenclatorExcel",
+  "robots_txt_compliant": true,
+  "tos_reviewed": true,
+  "notes": "Ministerio de Sanidad Nomenclator full Excel export. Primary lane used here is 'Precio de venta al público con IVA' mapped to public_retail_price."
+}

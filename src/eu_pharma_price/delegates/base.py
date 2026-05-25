@@ -12,6 +12,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
+from ..normalization.dosage_forms import normalize_dosage_form
 from ..schemas.records import CanonicalPriceRecord
 from ..schemas.review import AnomalyReport, AnomalyStatus, AnomalyType, Severity
 from ..schemas.source import RawRecord
@@ -53,6 +54,8 @@ class BaseDelegate(ABC):
     delimiter: str = ","
     encoding: str = "utf-8"
     local_field_descriptions: dict[str, str] = {}
+    price_includes_vat: bool | None = None
+    price_includes_vat_by_lane: bool = False
 
     def __init__(self, repo_root: Path):
         if not self.country_code:
@@ -61,6 +64,11 @@ class BaseDelegate(ABC):
             raise ValueError(f"{type(self).__name__} must define default_currency")
         if not self.price_field:
             raise ValueError(f"{type(self).__name__} must define price_field")
+        if self.price_includes_vat is None and not self.price_includes_vat_by_lane:
+            raise ValueError(
+                f"{type(self).__name__} must define price_includes_vat "
+                "or set price_includes_vat_by_lane=True"
+            )
         self.repo_root = repo_root
 
     def parse_csv(self, file_path: Path) -> list[dict[str, str]]:
@@ -110,6 +118,16 @@ class BaseDelegate(ABC):
         for k, v in derived.items():
             if v is not None and not mapped.get(k):
                 mapped[k] = v
+
+        form_raw = mapped.get("dosage_form")
+        form_norm = normalize_dosage_form(
+            str(form_raw) if form_raw else None,
+            country_code=self.country_code,
+            source_field="dosage_form",
+            product_name=str(mapped.get("product_name", "")),
+        )
+        if form_norm.comparable_form_class:
+            mapped["dosage_form"] = form_norm.comparable_form_class
 
         required = ["product_name", "strength", "dosage_form", "pack_size"]
         missing = [f for f in required if not mapped.get(f)]
@@ -164,10 +182,18 @@ class BaseDelegate(ABC):
             price_amount=price_amount,
             price_currency=self.default_currency,
             price_type=self.price_field,
+            price_includes_vat=self.price_includes_vat,
+            dosage_form_raw=form_norm.raw_value,
+            dosage_form_attributes=list(form_norm.presentation_attributes),
+            dosage_form_normalization_method=form_norm.method,
+            dosage_form_normalization_confidence=form_norm.confidence,
+            dosage_form_rule_id=form_norm.rule_id,
+            dosage_form_caveat=form_norm.caveat,
             manufacturer=mapped.get("manufacturer"),
             national_product_code=mapped.get("national_product_code"),
             inn=mapped.get("inn"),
             atc_code=mapped.get("atc_code"),
+            route_of_administration=form_norm.route_family,
         )
         return canonical, None
 
